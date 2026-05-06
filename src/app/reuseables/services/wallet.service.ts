@@ -96,7 +96,7 @@ export class WalletService {
 
   cryptoCoins = ["TRON", "USD", "USDT"]
 
-   activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('local');
+   activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('crypto');
    activeChannelObs$ = this.activeChannel$.asObservable();
 
   selectedNetwork = 'BEP20';

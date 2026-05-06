@@ -118,4 +118,21 @@ export class QuickNavService {
 
     return password;
   }
+
+  getDateRange() {
+    const now = new Date();
+
+    const currentDate = new Date(now);
+
+    const firstNextMonth = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      1
+    );
+
+    return {
+      currentDate,
+      firstNextMonth
+    };
+  }
 }

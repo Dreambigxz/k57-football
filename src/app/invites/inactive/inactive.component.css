@@ -11,30 +11,30 @@
 table{
   width:100%;
   border-collapse:collapse;
-  background:#14141f;
+  background:#1e160c;
   font-size:13px;
 }
 
 thead{
-  background:#1d1d2b;
+  background:#2a1f12;
 }
 
 th{
   text-align:left;
   padding:12px;
-  color:#8c8ca1;
+  color:#bbb;
   font-weight:500;
   font-size:12px;
 }
 
 td{
   padding:12px;
-  border-top:1px solid #23233a;
-  color:#e4e4f1;
+  border-top:1px solid rgba(255,235,59,0.08);
+  color:#f5f5f5;
 }
 
 tr:hover{
-  background:#1a1a2d;
+  background:#2a1f12;
 }
 
 /* user column */
@@ -44,12 +44,11 @@ tr:hover{
 
 /* profit column */
 .profit{
-  color:#00e676;
+  color:#ff9800;
   font-weight:600;
 }
 
 /* status badge */
-
 .status{
   padding:3px 8px;
   border-radius:6px;
@@ -57,24 +56,22 @@ tr:hover{
 }
 
 .status.paid{
-  background:#00e67620;
-  color:#00e676;
+  background:rgba(255,152,0,0.15);
+  color:#ff9800;
 }
 
 .status.pending{
-  background:#ff980020;
-  color:#ff9800;
+  background:rgba(255,235,59,0.15);
+  color:#ffeb3b;
 }
 
 /* date */
 .date{
-  color:#9ca3af;
+  color:#aaa;
 }
 
 /* mobile */
-
 @media(max-width:600px){
-
   table{
     font-size:12px;
   }
@@ -82,5 +79,4 @@ tr:hover{
   th, td{
     padding:10px;
   }
-
 }

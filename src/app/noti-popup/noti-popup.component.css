@@ -1,102 +1,97 @@
-.ios-notification{
-  position:fixed;
-  top:20px;
-  right:20px;
-  width:320px;
+.ios-toast {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
 
-  background:#19152f;
-  background:linear-gradient(
-    150deg,
-    rgba(255,255,255,0.03) 0%,
-    rgba(255,255,255,0.01) 100%
-  );
+  width: calc(100% - 20px);
+  max-width: 420px;
 
-  backdrop-filter:blur(14px);
+  padding: 12px;
+  border-radius: 16px;
 
-  border:1px solid rgba(255,255,255,0.05);
-  border-radius:18px;
+  background: rgba(20, 14, 6, 0.95);
+  backdrop-filter: blur(14px);
 
-  padding:14px;
+  border: 1px solid rgba(255,235,59,0.1);
 
-  box-shadow:0 10px 35px rgba(0,0,0,0.45);
+  color: #fff;
+  z-index: 9999;
 
-  animation:iosSlide .35s ease;
-
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  color:white;
-  z-index:9999;
+  animation: slideDown 0.35s ease;
 }
 
-.ios-header{
-  display:flex;
-  align-items:center;
-  gap:10px;
+/* HEADER */
+.toast-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.ios-avatar{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:2px solid #a034fa;
+/* LEFT */
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.ios-title{
-  flex:1;
+/* ICON */
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #ff9800, #ffeb3b);
+  color: #111;
+  font-size: 14px;
 }
 
-.app-name{
-  font-size:14px;
-  font-weight:600;
-  color:#fff;
+/* TEXT */
+.meta .title {
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.time{
-  font-size:12px;
-  color:#9b8cff;
+.meta .time {
+  font-size: 11px;
+  color: #aaa;
 }
 
-.ios-close{
-  border:none;
-  background:none;
-  font-size:18px;
-  cursor:pointer;
-  color:#aaa;
+/* CLOSE */
+.close {
+  font-size: 18px;
+  cursor: pointer;
+  color: #aaa;
 }
 
-.ios-message{
-  font-size:14px;
-  color:#d7d6e3;
-  line-height:1.4;
-  margin:12px 0;
+/* BODY */
+.toast-body {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ddd;
+  line-height: 1.4;
 }
 
-.ios-actions{
-  text-align:right;
+/* FOOTER */
+.toast-footer {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ffeb3b;
+  cursor: pointer;
 }
 
-.read-more{
-  background:#a034fa;
-  color:white;
-  border:none;
-  padding:7px 16px;
-  border-radius:12px;
-  font-size:13px;
-  cursor:pointer;
-
-  box-shadow:0 5px 15px rgba(160,52,250,0.45);
-}
-
-.read-more:hover{
-  opacity:0.9;
-}
-
-@keyframes iosSlide{
-  from{
-    transform:translateY(-30px);
-    opacity:0;
+/* ANIMATION */
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -20px);
+    opacity: 0;
   }
-  to{
-    transform:translateY(0);
-    opacity:1;
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
   }
 }

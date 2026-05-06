@@ -144,7 +144,7 @@ export class AuthService {
     this.isLoggedIn = false;
     this.storeData.clear()
     this.loaderService.show()
-    window.location.reload();
+    window.location.reload()//='/sign-in';
   }
 
   /** ✅ Optional logout with confirmation */
@@ -194,7 +194,7 @@ export class AuthService {
   }
 
   setRefCode(){
-    let checkUrl = window.location.href.split('invite')
+    let checkUrl = window.location.href.split('ref')
 
     if (checkUrl[1]) {
       this.RefCode=checkUrl[1].replaceAll('=','')

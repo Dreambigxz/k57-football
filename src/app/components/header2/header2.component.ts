@@ -37,8 +37,11 @@ export class Header2Component {
   }
 
   segments(segments:any){
-    if (segments.includes("betinfo")) {
-      this.pageName="match info"
+
+    // console.log({segments:segments.pop()});
+
+    if (segments.includes("game-details")) {
+      this.pageName="Game Details"
     }else if(segments.includes("matches")){
       this.pageName='market'
     }else if(segments.includes("bethistory")){
@@ -56,9 +59,7 @@ export class Header2Component {
     else if(segments.includes("my-plan")){
       this.pageName='Trade'
     }
-    else if(segments.includes("vi")||segments.includes("vi#createvi")){
-      this.pageName='VI Quantitative Trading'
-    }
+
     else{
       this.pageName=segments.pop()?.split("?")[0] || ''
     }

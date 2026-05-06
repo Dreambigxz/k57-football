@@ -1,87 +1,84 @@
 <app-header2></app-header2>
 <app-spinner></app-spinner>
 
-
 <div *ngIf="storeData.store['notification'] as notifications" class="notif-page">
 
-
-  <!-- Tabs -->
-  <div class="notif-tabs">
-    <button
+  <!-- TOP SWITCH -->
+  <div class="notif-switch">
+    <div
+      class="switch-item"
       [class.active]="activeTab==='unseen'"
       (click)="activeTab='unseen'">
-      Unread ({{notifications.unseen_read?.length || 0}})
-    </button>
 
-    <button
+      Unread
+      <span class="count">{{notifications.unseen_read?.length || 0}}</span>
+    </div>
+
+    <div
+      class="switch-item"
       [class.active]="activeTab==='seen'"
       (click)="activeTab='seen'">
-      Seen ({{notifications.seen?.length || 0}})
-    </button>
+
+      Seen
+      <span class="count">{{notifications.seen?.length || 0}}</span>
+    </div>
   </div>
 
+  <!-- LIST -->
+  <div class="notif-feed">
 
-  <!-- UNREAD -->
-  <div *ngIf="activeTab==='unseen'" class="notif-list">
+    <ng-container *ngIf="activeTab==='unseen'; else seenBlock">
 
-    <div class="notif-card" *ngFor="let n of notifications.unseen_read">
+      <div class="notif-item unread" *ngFor="let n of notifications.unseen_read">
 
-      <div class="notif-icon">
-        <i class="fa fa-message"></i>
-      </div>
+        <div class="notif-dot"></div>
 
-      <div class="notif-content">
+        <div class="notif-body">
 
-        <div class="notif-top">
-          <span class="notif-title">{{n.header}}</span>
-          <span class="notif-time">{{n.timestamp | date:'short'}}</span>
-        </div>
+          <div class="notif-head">
+            <span class="title">{{n.header}}</span>
+            <span class="time">{{n.timestamp | date:'MMM d, HH:mm'}}</span>
+          </div>
 
-        <div class="notif-message" [innerHTML]="n.message"></div>
+          <div class="message" [innerHTML]="n.message"></div>
 
-        <div class="notif-help" *ngIf="n.help">
-          {{n.help}}
-        </div>
+          <div class="help" *ngIf="n.help">
+            {{n.help}}
+          </div>
 
-      </div>
-
-    </div>
-
-    <div *ngIf="!notifications.unseen_read?.length" class="empty-state">
-      <div class="no-data text-center">
-        <img class="empty-icon" src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/database-off.svg">
-        <p>No Unread found.</p>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- SEEN -->
-  <div *ngIf="activeTab==='seen'" class="notif-list">
-
-    <div class="notif-card seen" *ngFor="let n of notifications.seen">
-
-      <div class="notif-icon">
-      <i class="fa fa-message"></i>
-      </div>
-
-      <div class="notif-content">
-
-        <div class="notif-top">
-          <span class="notif-title">{{n.header}}</span>
-          <span class="notif-time">{{n.timestamp | date:'short'}}</span>
-        </div>
-
-        <div class="notif-message" [innerHTML]="n.message"></div>
-
-        <div class="notif-help" *ngIf="n.help">
-          {{n.help}}
         </div>
 
       </div>
 
-    </div>
+      <!-- EMPTY -->
+      <div *ngIf="!notifications.unseen_read?.length" class="empty-state">
+        <img src="assets/images/empty-box.png">
+        <p>No unread notifications</p>
+      </div>
+
+    </ng-container>
+
+    <!-- SEEN -->
+    <ng-template #seenBlock>
+      <div class="notif-item seen" *ngFor="let n of notifications.seen">
+
+        <div class="notif-body">
+
+          <div class="notif-head">
+            <span class="title">{{n.header}}</span>
+            <span class="time">{{n.timestamp | date:'MMM d, HH:mm'}}</span>
+          </div>
+
+          <div class="message" [innerHTML]="n.message"></div>
+
+          <div class="help" *ngIf="n.help">
+            {{n.help}}
+          </div>
+
+        </div>
+
+      </div>
+    </ng-template>
 
   </div>
 

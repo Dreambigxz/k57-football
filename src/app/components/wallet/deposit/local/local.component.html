@@ -1,69 +1,70 @@
 
+<div *ngIf="walletService.quickNav.storeData.store['wallet']?.['hasPin']; else noPin">
 
-<div *ngIf="!walletService.quickNav.storeData.store['deposit']?.length;else pendingDeposit">
-  <div class="network-options">
+  <div *ngIf="!walletService.quickNav.storeData.store['deposit']?.length; else pendingDeposit"
+       class="local-deposit">
 
-    <label *ngFor="let curr of walletService.getVisibleCurrencies([2])"
-         class="network-option"
-         [class.active]="walletService.selectedLocaLMethod === curr.code">
+    <!-- METHOD SELECT -->
+    <div class="method-grid">
+      <div
+        *ngFor="let curr of walletService.getVisibleCurrencies([2])"
+        class="method-chip"
+        [class.active]="walletService.selectedLocaLMethod === curr.code"
+        (click)="walletService.selectedLocaLMethod = curr.code">
 
-        <input type="radio"
-               name="network"
-               [value]="curr.code"
-               [(ngModel)]="walletService.selectedLocaLMethod"
-               >
-
-        <div class="network-card">
-          <div class="left">
-            <div *ngIf="['XOF'].includes(curr.code)" class="">
-              <span>🌍</span>
-            </div>
-            <div *ngIf="!['XOF'].includes(curr.code)">
-              <img  [src]="makeFlag(curr.code)" alt="🌍">
-
-            </div>
-            <!-- <ng-template #showFlag>
-              </ng-template> -->
-            <div class="text">
-              <div class="code">{{ curr.code }}</div>
-              <div class="sub">{{ curr.name}} Method</div>
-            </div>
-          </div>
-
-          <div class="right">
-            <div class="radio-dot"></div>
-          </div>
+        <div class="icon">
+          <span *ngIf="['XOF'].includes(curr.code)">🌍</span>
+          <img *ngIf="!['XOF'].includes(curr.code)" [src]="makeFlag(curr.code)">
         </div>
 
-      </label>
-
-  </div>
-
-  <div *ngIf="walletService.selectedLocaLMethod" id="local-amount" class=" mt-2">
-
-    <div class="apool__group">
-      <label for="pool1" class="apool__label">Enter amount</label>
-      <input
-          [(ngModel)]="walletService.localAmount"
-          type="number"
-          class="form__input"
-          placeholder="{{walletService.selectedData.symbol}}{{walletService.minimumPayment|number:'1.2-2'}}"
-          >
+        <div class="meta">
+          <div class="code">{{ curr.code }}</div>
+          <div class="sub">{{ curr.name }}</div>
+        </div>
+      </div>
     </div>
 
-    <!-- chatgpt style this flex table -->
-    <div class="trade-properties">
-      <div class="row-item space-between">
-        <span class="label">Minimum</span>
-        <span class="value minimum">{{walletService.selectedData.symbol}}{{walletService.minimumPayment|number:"1.2-2"}}</span>
+    <!-- AMOUNT + ACTION -->
+    <div *ngIf="walletService.selectedLocaLMethod" class="amount-card">
+
+      <!-- INPUT -->
+      <div class="amount-input">
+        <input
+          type="number"
+          [(ngModel)]="walletService.localAmount"
+          placeholder="Enter amount"
+        >
+        <span class="currency">
+          {{ walletService.selectedData?.symbol }}
+        </span>
       </div>
 
-    </div>
+      <!-- QUICK INFO -->
+      <div class="amount-info">
+        <span>Min</span>
+        <strong>
+          {{ walletService.selectedData.symbol }}
+          {{ walletService.minimumPayment | number:'1.2-2' }}
+        </strong>
+      </div>
 
-    <button (click)="creeateDeposit()" [disabled]="!walletService.localAmount||walletService.localAmount<walletService.minimumPayment"  class="apool__btn"  type="submit" >Send</button>
+      <!-- CTA -->
+      <button
+        (click)="creeateDeposit()"
+        [disabled]="!walletService.localAmount || walletService.localAmount < walletService.minimumPayment"
+        class="btn-send">
+
+        Continue →
+      </button>
+
+    </div>
 
   </div>
 </div>
+
+<ng-template #noPin>
+  <app-create-pin></app-create-pin>
+</ng-template>
 
 <ng-template #pendingDeposit>
   <app-invoice></app-invoice>

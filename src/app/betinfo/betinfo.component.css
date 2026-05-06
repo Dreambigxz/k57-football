@@ -1,0 +1,154 @@
+.match-card {
+  background: linear-gradient(145deg, #22180d, #120c05);
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid rgba(255,235,59,0.05);
+  color: #fff;
+}
+
+/* TOP */
+.top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.league {
+  color: #ff9800;
+  font-weight: 600;
+}
+
+/* TEAMS */
+.teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.team {
+  text-align: center;
+  width: 30%;
+}
+
+.logo {
+  width: 55px;
+  height: 55px;
+  margin: auto;
+  border-radius: 50%;
+  background: #2a1f12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 70%;
+}
+
+.name {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+/* CENTER */
+.center {
+  text-align: center;
+}
+
+.time {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.vs {
+  font-size: 12px;
+  color: #999;
+}
+
+.date {
+  font-size: 12px;
+  color: #bbb;
+}
+
+/* COUNTDOWN */
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.timer-box {
+  display: flex;
+  gap: 5px;
+}
+
+.t {
+  background: #ff9800;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  min-width: 28px;
+  text-align: center;
+}
+
+.sep {
+  color: #aaa;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* BOX */
+.box {
+  background: linear-gradient(145deg, #2a1f12, #140e06);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,235,59,0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* HOVER */
+.box:hover:not(.disabled) {
+  transform: translateY(-3px);
+  border-color: #ff9800;
+  box-shadow: 0 6px 20px rgba(255,152,0,0.2);
+}
+
+/* ACTIVE */
+.box.active {
+  border-color: #ff9800;
+  background: linear-gradient(145deg, #ff980022, #140e06);
+  box-shadow: 0 0 15px rgba(255,152,0,0.35);
+}
+
+/* DISABLED */
+.box.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* TEXT */
+.score {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 6px;
+  color: #fff;
+}

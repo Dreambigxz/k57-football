@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WalletService } from '../../../../reuseables/services/wallet.service';
 import { InvoiceComponent } from '../../invoice/invoice.component';
-import { CreatePinComponent } from '../create-pin/create-pin.component';
+import { CreatePinComponent } from '../../create-pin/create-pin.component';
 
 @Component({
   selector: 'app-withdraw-local',
@@ -14,7 +14,7 @@ import { CreatePinComponent } from '../create-pin/create-pin.component';
     InvoiceComponent,CreatePinComponent
   ],
   templateUrl: './local.component.html',
-  styleUrl: './local.component.css'
+  styleUrls: ['./local.component.css', "../../wallet-styles.component.css"]
 })
 export class LocalComponent {
 

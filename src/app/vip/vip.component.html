@@ -1,0 +1,135 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div *ngIf="quickNav.storeData.store['vip_system'] as vip" class="vip-page">
+
+  <!-- PROGRESS ORBIT -->
+  <div class="vip-orbit">
+
+  <div class="orbit-curve"></div>
+
+  <div
+    *ngFor="let v of vipLevels; let i = index"
+    class="orbit-node"
+    [class.active]="i <= vip.active.vip_level"
+    [style.left.%]="(i / (vipLevels.length - 1)) * 100"
+    [style.bottom.px]="getCurveHeight(i)"
+  >
+    <div class="dot"></div>
+    <span class="vip-text">V{{ i }}</span>
+  </div>
+
+</div>
+
+  <!-- STATS -->
+  <div class="vip-stats">
+    <div class="stat">
+      <strong>{{quickNav.storeData.store['wallet'].balance.new|currencyConverter:true:false:0}}</strong>
+      <span>Balance</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stat">
+      <strong>{{vip.bet_amount|currencyConverter:true:false:0}}</strong>
+      <span>valid bet</span>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="vip-card">
+
+    <div class="vip-left">
+      <h2>VIP{{vip.active.vip_level}}</h2>
+      <span class="sub">Current Level</span>
+
+      <!-- <div class="progress">
+        <span>Deposit</span>
+        <div class="bar"><div class="fill"></div></div>
+      </div>
+
+      <div class="progress">
+        <span>Valid bet</span>
+        <div class="bar"><div class="fill"></div></div>
+      </div> -->
+    </div>
+
+    <div class="vip-badge">
+      💎
+      <span>V{{vip.active.vip_level}}</span>
+    </div>
+
+  </div>
+
+  <!-- next requirements card  -->
+  <div class="vip-progress-card">
+
+    <div class="space-between">
+      <h2>VIP{{vip.active.next_level}}</h2>
+      <span style="color:#448" class="sub">Next Level</span>
+
+    </div>
+    <!-- Deposit -->
+    <div class="progress-block mt-2">
+      <div class="progress-header">
+        <span>Deposit Required</span>
+        <span class="target">V{{ vip.next.vip_level }}</span>
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill wager"
+          [style.width.%]="depositProgress">
+        </div>
+      </div>
+
+      <div class="progress-footer">
+        <span>{{ vip.next.deposit_range.split("-")[0].replaceAll("$", '')|currencyConverter:true:false:0 }} to {{ vip.next.deposit_range.split("-")[1].replaceAll("$", '')|currencyConverter:true:false:0 }} </span>
+        <!-- <span>{{ vip.next.deposit_range.split("-")[0].replaceAll("$", '')|currencyConverter:true:false:0 }} / {{ vip.next.deposit_range.split("-")[1].replaceAll("$", '')|currencyConverter:true:false:0 }} </span> -->
+      </div>
+    </div>
+
+    <!-- Wager -->
+    <div class="progress-block">
+      <div class="progress-header">
+        <span>Bet Required</span>
+        <span class="target">V{{ vip.next.vip_level }}</span>
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill wager"
+          [style.width.%]="wagerProgress">
+        </div>
+      </div>
+
+      <div class="progress-footer">
+        <span>{{ vip.next.bet_amount.replaceAll("$",'')|currencyConverter:true:false:0 }} </span>
+        <!-- <span>{{ vip.bet_amount|currencyConverter:true:false:0 }} / {{ vip.next.bet_amount.replaceAll("$",'')|currencyConverter:true:false:0 }} </span> -->
+      </div>
+    </div>
+
+</div>
+
+  <!-- PRIVILEGES -->
+  <div class="vip-section">
+    <h4>Privileges</h4>
+
+    <div class="vip-item">
+      <span>Level Bonus</span>
+      <strong>{{vip.active.claim_reward.replace("$","")|currencyConverter:true}}</strong>
+    </div>
+
+    <div class="vip-item">
+      <span>Daily Limit</span>
+      <strong>{{vip.active.max_withdrawal|currencyConverter:true}}</strong>
+    </div>
+
+    <!-- <div class="vip-item">
+      <span>Withdrawal Fee</span>
+      <strong>50%</strong>
+    </div> -->
+
+  </div>
+
+</div>

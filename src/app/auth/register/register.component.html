@@ -88,7 +88,7 @@
         <label for="remember">I agree to the <a href="#">Privacy Policy</a></label>
       </div> -->
 
-      <button class="form__btn" type="submit" [disabled]="authService.formView.register.invalid">Sign up</button>
+      <button  type="submit" [disabled]="authService.formView.register.invalid">Sign up</button>
 
 
       <span class="form__text form__text--center">Already have an account? <a (click)="authService.router.navigate(['/login'])" >Sign in!</a></span>

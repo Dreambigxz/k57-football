@@ -1,0 +1,100 @@
+button[type="submit"] {
+  width: 100%;
+  padding: 14px 18px;
+  margin-top: 6px;
+
+  background: linear-gradient(
+      135deg,
+      #ff9800,
+      #ffeb3b);
+  color: #111;
+
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+
+  filter: brightness(1.05);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: #ffeb3b;
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  background: linear-gradient(135deg, #cc7a00, #e6d200);
+  transform: translateY(1px);
+  box-shadow:
+    0 8px 20px rgba(255,152,0,.35),
+    inset 0 2px 6px rgba(0,0,0,.3);
+}
+
+button[type="submit"]:disabled {
+  background: linear-gradient(135deg, #8e9095, #737577);
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  filter: none;
+}
+
+button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* primary */
+button[type="submit"].primary {
+   background: #999;
+}
+
+/* Loading state */
+button.loading {
+  pointer-events: none;
+  filter: brightness(.95);
+}
+
+/* Hide text when loading */
+button.loading .btn-label {
+  opacity: 0;
+}
+
+/* Spinner */
+button.loading::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+
+  border: 2.5px solid rgba(255,255,255,.35);
+  border-top-color: #ff9800;
+  border-radius: 50%;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.color-main{
+  color: #ff9800;
+}

@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { Header2Component } from "../../components/header2/header2.component";
+import { SpinnerComponent } from '../../reuseables/http-loader/spinner.component';
 
 import { CurrencyConverterPipe } from '../../reuseables/pipes/currency-converter.pipe';
 
@@ -13,6 +15,7 @@ import { QuickNavService } from '../../reuseables/services/quick-nav.service';
 
 import { CryptoComponent } from "../../components/wallet/withdraw/crypto/crypto.component";
 import { LocalComponent } from "../../components/wallet/withdraw/local/local.component";
+import { WalletComponent } from "../wallet.component";
 
 
 @Component({
@@ -20,7 +23,9 @@ import { LocalComponent } from "../../components/wallet/withdraw/local/local.com
   imports: [
       CommonModule,FormsModule,
       ReactiveFormsModule,CurrencyConverterPipe,
-      CryptoComponent,LocalComponent
+      CryptoComponent,LocalComponent,
+      Header2Component, SpinnerComponent,
+      WalletComponent
     ],
   templateUrl: './withdraw.component.html',
   // styleUrl:  "../wallet-styles.component.css"

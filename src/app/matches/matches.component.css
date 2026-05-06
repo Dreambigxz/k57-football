@@ -1,0 +1,265 @@
+.screen {
+  /* background: radial-gradient(circle at top, #1a140a, #0c0904); */
+  margin-top: 12px;
+  padding: 5px;
+  min-height: 100vh;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+.container{
+  padding: 20px;
+}
+
+/* SEARCH */
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background: rgba(255,235,59,0.05);
+  border: 1px solid rgba(255,235,59,0.08);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  padding: 5px;
+}
+
+.search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  color: #ddd;
+  outline: none;
+}
+
+.search .id {
+  padding: 0 10px;
+  color: #ff9800;
+  font-weight: 600;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, #ff9800, #ffeb3b);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* HEADER */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.title {
+  color: #ff9800;
+  font-weight: 600;
+}
+
+.pill {
+  background: rgba(255,152,0,0.15);
+  color: #ff9800;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* CARD */
+.card {
+  /* background: linear-gradient(145deg, #22180d, #150f07); */
+  background: radial-gradient(circle at top, #1a140a, #0c0904);
+
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255,235,59,0.05);
+  box-shadow: 0 10px 10px rgba(0,0,0,0.6);
+  margin-bottom: 12px;
+}
+
+/* TOP */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* BODY */
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* TEAMS */
+.teams {
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* TEAM BLOCK */
+.team-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* LOGO */
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a1f12, #140e06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 2px rgba(255,235,59,0.08),
+    0 0 12px rgba(255,152,0,0.2);
+}
+
+/* IMAGE */
+.logo img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+/* NAME */
+.name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* VS */
+.vs {
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 2px;
+  text-align: center;
+  font-style: italic;
+}
+
+.vs {
+  margin: 8px 0;
+  font-size: 12px;
+  color: #999;
+}
+
+/* TIMER */
+.timer {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.timer svg {
+  transform: rotate(-90deg);
+}
+
+.timer .time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+
+.timer circle {
+  fill: none;
+  stroke-width: 3;
+  stroke: #2a1f12;
+}
+
+.timer circle:last-child {
+  stroke: #ff9800;
+  stroke-dasharray: 326;
+  transition: stroke-dashoffset 1s linear, stroke 0.5s;
+}
+
+/* TIME */
+.time {
+  position: absolute;
+  top: 60%;
+  left: 34%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff3c4;
+}
+
+/* BOTTOM */
+.card-bottom {
+  font-size: 12px;
+  color: #aaa;
+}
+
+
+/* floating btn */
+.floating-toggle {
+  position: fixed;
+  bottom:140px;
+  right:10px;
+  /* left: 50%; */
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+/* PILL CONTAINER */
+.toggle-pill {
+  position: relative;
+  display: flex;
+  width: 180px;
+  height: 30px;
+  background: #111;
+  border-radius: 50px;
+  padding: 4px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* OPTIONS */
+.option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 13px;
+  z-index: 2;
+  color: #aaa;
+}
+
+/* ACTIVE COLORS */
+.toggle-pill:not(.risk) .safe {
+  color: #fff;
+}
+
+.toggle-pill.risk .risk {
+  color: #fff;
+}
+
+/* SLIDER */
+.slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #00e676, #00c853);
+  transition: all 0.3s ease;
+}
+
+/* MOVE RIGHT */
+.toggle-pill.risk .slider {
+  left: calc(50% + 0px);
+  background: linear-gradient(135deg, #ff5252, #d50000);
+}

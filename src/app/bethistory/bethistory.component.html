@@ -1,0 +1,195 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div class="page page-wrapper ">
+
+  <section *ngIf="historyServiceLoaded" class="app-container ">
+
+    <!-- BET TABS -->
+    <div class="bets-tabs mt-10 mb-4">
+      <button
+        [class.active]="activeTab === 'openbet'"
+        (click)="switchTab('openbet')">
+        Running ({{ historyServiceLoaded.openBetDisplay.length }})
+      </button>
+
+      <button
+        [class.active]="activeTab === 'settled'"
+        (click)="switchTab('settled')">
+        Completed ({{ historyServiceLoaded.settledBets.length }})
+      </button>
+    </div>
+
+    <!-- OPEN BETS -->
+    <div *ngIf="activeTab === 'openbet'" class="bets-content">
+      <ng-container *ngIf="historyServiceLoaded.openBetDisplay.length; else emptyOpen">
+        <div *ngFor="let bet of historyServiceLoaded.openBetDisplay" class="tx-card">
+
+          <!-- HEADER -->
+          <div class="">
+            <div>
+              <!-- <div class="title">Open Transactions</div> -->
+              <div class="order">Order No. #1777275939843</div>
+            </div>
+
+            <button *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)"  class="btn-cancel">Cancel</button>
+          </div>
+
+          <!-- AMOUNT -->
+          <div class="amount-row">
+            <div>
+              <div class="label">Bet Amount</div>
+              <div class="amount">{{bet.stake_amount|currencyConverter:true}}</div>
+            </div>
+
+            <div>
+              <div class="label">Estimate Return</div>
+              <div class="amount highlight">1229.98</div>
+            </div>
+          </div>
+
+          <!-- STATS -->
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Score</div>
+              <div>{{bet.market_value}}</div>
+            </div>
+
+            <div class="stat">
+              <div class="label">Profit %</div>
+              <div class="highlight">{{bet.market_odds}}%</div>
+            </div>
+
+            <div class="stat">
+              <div class="label">status</div>
+              <div class="{{bet.status}}">{{bet.status}}</div>
+            </div>
+          </div>
+
+          <!-- TIME -->
+          <div class="time-row">
+            <div>
+              <div class="label">Placed At</div>
+              <div class="time">{{ bet.timestamp | date:'short' }}</div>
+            </div>
+
+            <div>
+              <div class="label">Match Start</div>
+              <div class="time">{{ bet.fixture[0].fixture.date | date:'short' }}</div>
+            </div>
+          </div>
+
+          <!-- MATCH -->
+          <div class="match">
+            <div class="league">LEAGUE: {{bet.fixture[0].league.name}}</div>
+
+            <div class="teams">
+              <span>{{bet.fixture[0].teams.home.name}}</span>
+              <span class="vs">VS</span>
+              <span>{{bet.fixture[0].teams.away.name}}</span>
+            </div>
+
+          </div>
+
+        </div>
+      </ng-container>
+
+      <ng-template #emptyOpen>
+        <div class="empty-state">
+          <img src="assets/images/empty-box.png" alt="No open bets">
+          <p>No open bets found</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- SETTLED BETS -->
+    <div *ngIf="activeTab === 'settled'" class="bets-content">
+      <ng-container *ngIf="historyServiceLoaded.settledBets.length; else emptySettled">
+
+        <div *ngFor="let bet of historyServiceLoaded.settledBets" class="tx-card">
+
+          <!-- HEADER -->
+          <div class="">
+            <div>
+              <!-- <div class="title">Open Transactions</div> -->
+              <div class="order">Order No. #{{bet.ticket_id}}</div>
+            </div>
+
+            <button *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)"  class="btn-cancel">Cancel</button>
+          </div>
+
+          <!-- AMOUNT -->
+          <div class="amount-row">
+            <div>
+              <div class="label">Bet Amount</div>
+              <div class="amount ">{{bet.stake_amount|currencyConverter:true}}</div>
+            </div>
+
+            <div>
+              <div class="label">Estimate Return</div>
+              <div class="amount highlight {{bet.status}}">{{setProfit(bet,true)|currencyConverter:true}}</div>
+            </div>
+          </div>
+
+          <!-- STATS -->
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Score</div>
+              <div>{{bet.market_value}}</div>
+            </div>
+
+            <div class="stat">
+              <div class="label">Profit %</div>
+              <div class="highlight">{{bet.market_odds}}%</div>
+            </div>
+
+            <div class="stat">
+              <div class="label">status</div>
+              <div class="{{bet.status}}">{{bet.status}}</div>
+            </div>
+          </div>
+
+          <!-- TIME -->
+          <div class="time-row">
+            <div>
+              <div class="label">Placed At</div>
+              <div class="time">{{ bet.timestamp | date:'short' }}</div>
+            </div>
+
+            <div>
+              <div class="label">Match Start</div>
+              <div class="time">{{ bet.fixture[0].fixture.date | date:'short' }}</div>
+            </div>
+          </div>
+
+          <!-- MATCH -->
+          <div class="match">
+            <div class="league">LEAGUE: {{bet.fixture[0].league.name}}</div>
+
+            <div class="teams">
+              <span>{{bet.fixture[0].teams.home.name}}</span>
+              <span class="vs">
+                {{ bet.fixture[0].score?.fulltime?.home || 0 }} -
+                {{ bet.fixture[0].score.fulltime.away || 0}}
+              </span>
+              <span>{{bet.fixture[0].teams.away.name}}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </ng-container>
+
+      <ng-template #emptySettled>
+        <div class="empty-state">
+          <img src="assets/images/empty-box.png" alt="No settled bets">
+          <p>No settled bets found</p>
+        </div>
+      </ng-template>
+    </div>
+
+  </section>
+</div>
+
+<app-menu-bottom></app-menu-bottom>

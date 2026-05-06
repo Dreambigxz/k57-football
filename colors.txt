@@ -3,3 +3,6 @@ Sec: #19152f
 background: linear-gradient(150deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
 
 sub: #a034fa
+
+____NEW___
+Main: #ff9800 -> fadded/liht #ffeb3b

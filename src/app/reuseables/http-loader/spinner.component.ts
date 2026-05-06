@@ -31,8 +31,7 @@ import { Observable, of} from 'rxjs';
 `,
 styles: [`
 
-  /* overlay */
-
+    /* overlay */
   .spinner-overlay {
     position: fixed;
     inset: 0;
@@ -41,112 +40,98 @@ styles: [`
     align-items: center;
     justify-content: center;
 
-  /*  background: radial-gradient(circle at center,#1c1b2e,#0b0a16); */
+    backdrop-filter: blur(2px);
+    background: rgba(20, 14, 6, 0.6);
 
-    backdrop-filter: blur(1px);
     z-index: 2000;
-
-    overflow:hidden;
-
+    overflow: hidden;
   }
-
 
   /* container */
-
-  .logo-container{
+  .logo-container {
     position: relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .loading-text{
-    position:absolute;
-    bottom:35%;
-    font-size:13px;
-    color:#9ca3af;
-    letter-spacing:.4px;
+  /* loading text */
+  .loading-text {
+    position: absolute;
+    bottom: 35%;
+    font-size: 13px;
+    color: #ffeb3b;
+    letter-spacing: 0.4px;
     animation: fadePulse 1.6s infinite;
   }
 
-  @keyframes fadePulse{
-    0%,100%{opacity:.4}
-    50%{opacity:1}
+  @keyframes fadePulse {
+    0%,100% { opacity: .4 }
+    50% { opacity: 1 }
   }
 
-
   /* glow ring */
+  .glow-ring {
+    position: absolute;
 
-  .glow-ring{
-    position:absolute;
+    width: 110px;
+    height: 110px;
 
-    width:110px;
-    height:110px;
-
-    border-radius:50%;
+    border-radius: 50%;
 
     background: radial-gradient(circle,
-      rgba(108,92,231,.6),
-      rgba(108,92,231,.15),
+      rgba(255,152,0,0.6),
+      rgba(255,235,59,0.2),
       transparent
     );
 
     animation: pulseGlow 2s ease-in-out infinite;
   }
 
-
   /* logo */
+  .logo-float {
+    width: 70px;
+    max-width: 35vw;
 
-  .logo-float{
-    width:70px;
-    max-width:35vw;
+    z-index: 2;
 
-    z-index:2;
-
-    filter: drop-shadow(0 0 10px rgba(108,92,231,.6));
+    filter: drop-shadow(0 0 12px rgba(255,152,0,0.6));
 
     animation: logoFloat 2.2s ease-in-out infinite;
   }
 
-
-  /* float animation */
-
-  @keyframes logoFloat{
-    0%,100%{
+  /* float */
+  @keyframes logoFloat {
+    0%,100% {
       transform: translateY(0);
     }
-    50%{
+    50% {
       transform: translateY(-10px);
     }
   }
 
-
   /* glow pulse */
-
-  @keyframes pulseGlow{
-    0%,100%{
+  @keyframes pulseGlow {
+    0%,100% {
       transform: scale(.9);
-      opacity:.6;
+      opacity: .7;
     }
-
-    50%{
-      transform: scale(1.2);
-      opacity:.2;
+    50% {
+      transform: scale(1.25);
+      opacity: .2;
     }
   }
 
-
   /* mobile */
+  @media (max-width: 480px) {
 
-  @media (max-width:480px){
-
-    .logo-float{
-      width:55px;
+    .logo-float {
+      width: 55px;
     }
 
-    .glow-ring{
-      width:90px;
-      height:90px;
+    .glow-ring {
+      width: 90px;
+      height: 90px;
     }
 
   }

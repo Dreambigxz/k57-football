@@ -7,9 +7,11 @@
   height: 96px;
   padding-bottom: env(safe-area-inset-bottom);
 
-  background: #19152f;
+  /* background: #19152f; */
   /* linear-gradient(150deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); */
   /* border-top: 1px solid rgba(255,255,255,.08); */
+  background: radial-gradient(circle at top, #1a140a, #0c0904);
+
 
   display: flex;
   justify-content: space-around;
@@ -59,14 +61,14 @@
 
 /* ACTIVE */
 .nav-item.active i {
-  color: #a034fa;
+  color: #ff9800;
   /* background: rgba(4,121,180,.14);
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(4,121,180,.35); */
 }
 
 .nav-item.active span {
-  color: #a034fa;
+  color: #ff9800;
   font-weight: 900;
 }
 

@@ -28,7 +28,7 @@ export async function copyContent(qm:any,data:any,message='Copied to clipboard',
    try {await navigator.clipboard.writeText(data);
      // let message=text || '';
      show_message?[
-       qm.show({message,status:'success'})
+       qm.show({message: `${message} ✅`,status:'success'})
      ]:0;
      // show_message?toastMess(message):0;
    } catch (err) {console.error('Failed to copy: ', err);}

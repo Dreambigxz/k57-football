@@ -21,8 +21,9 @@
 }
 
 .success{
-  background:linear-gradient(135deg,#19152f,#19152f);
-  border: 1px solid #a034fa;
+  background: linear-gradient(
+270deg, #22180d, #150f07);
+  border: 1px solid #ff9800;
 }
 
 .error{

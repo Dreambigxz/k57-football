@@ -1,46 +1,57 @@
-<div *ngIf="storeData.store['withdraw'][0] as withdraw" class="invoice-container">
+<div *ngIf="storeData.store['withdraw'][0] as withdraw" class="withdraw-flow">
 
-  <!-- 🧾 INVOICE CARD -->
-  <div  class="invoice-card">
-    <span (click)="walletService.cancelPayment('withdraw')" class="text-right text-danger">Delete</span>
-    <h5>Withdraw Invoice</h5>
+  <!-- 🔷 SUMMARY -->
+  <div class="withdraw-card">
 
-    <div class="invoice-row">
-      <span>Receiving </span>
-      <strong>{{withdraw.method}}{{withdraw.init_amount|number:"1.2-2"}}</strong>
+    <div class="card-head">
+      <h6>Withdrawal</h6>
+      <span class="close" (click)="walletService.cancelPayment('withdraw')">✕ delete</span>
     </div>
 
-    <div class="invoice-row">
-      <span>Reference</span>
-      <strong>{{withdraw.sessionID}}</strong>
+    <!-- GRID INFO -->
+    <div class="info-grid">
+
+      <div class="info-item">
+        <span>Receiving</span>
+        <strong>{{withdraw.method}}{{withdraw.init_amount | number:'1.2-2'}}</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Reference</span>
+        <strong class="mono">{{withdraw.sessionID}}</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Opened</span>
+        <strong>{{withdraw.timestamp | date:'dd MMM, hh:mm a'}}</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Processing</span>
+        <strong class="countdown">
+          {{withdraw.timestamp | countdown:storeData.store['wallet']?.settings.max_await_time.withdraw | async}}
+        </strong>
+      </div>
+
     </div>
 
-    <div class="invoice-row time">
-      <span>Opened</span>
-      <strong>{{withdraw.timestamp| date:'dd.MM.yy hh:mm a'}}</strong>
-    </div>
-
-    <div class="invoice-row time">
-      <span>Elapsing</span>
-      <strong>{{withdraw.timestamp|countdown:storeData.store['wallet']?.settings.max_await_time.withdraw|async}}</strong>
-    </div>
-
-    <div [class]="withdraw.status" class="status">
-      {{withdraw.status|titlecase}} Payment
+    <!-- STATUS -->
+    <div class="status-pill" [class]="withdraw.status">
+      {{withdraw.status | titlecase}}
     </div>
 
   </div>
 
-  <!-- 📌 GUIDE -->
-  <div class="guide-card">
-    <h5>Withdrawal Notice!!!</h5>
-    <ol>
-      <li>Withdrawals are automatically process.</li>
+  <!-- 🧠 NOTICE -->
+  <div class="notice-card">
 
-      <li>Payment will be completed  within the <strong>elapsing</strong> time.</li>
-      <li>No vi user is expected to complain if the withdraw has not exceeded elapsing time frame.</li>
-      <li>We expect all members to be guided and follow vi rules for smooth operation.</li>
-    </ol>
+    <div class="notice-title">Processing Rules</div>
+
+    <div class="notice-item">• Withdrawals are processed automatically</div>
+    <div class="notice-item">• Funds will arrive within processing time</div>
+    <div class="notice-item">• Do not report before timer completes</div>
+    <div class="notice-item">• Follow rules for smooth transactions</div>
+
   </div>
 
 </div>

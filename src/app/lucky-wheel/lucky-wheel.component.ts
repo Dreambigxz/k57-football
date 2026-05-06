@@ -92,8 +92,8 @@ export class LuckyWheelComponent {
 
   get wheelGradient() {
 
+    if (!this.rewards.length) return;
 
-    if (!this.rewards.length) return
     const angle = 360 / this.rewards.length;
     const gap = 2;
 
@@ -102,9 +102,12 @@ export class LuckyWheelComponent {
       const start = i * angle;
       const end = start + angle - gap;
 
-      let color = i % 2 ? '#a034fa' : '#b493d8';
-      if (i==0) {
-        color='#adb5bd'
+      // premium gold alternation
+      let color = i % 2 ? '#ff9800' : '#ffeb3b';
+
+      // optional: neutral for first segment (like "try again")
+      if (i === 0) {
+        color = '#bfa76a'; // muted gold
       }
 
       return `

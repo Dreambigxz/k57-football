@@ -38,7 +38,7 @@ export class CurrencyConverterPipe implements PipeTransform {
     }
 
     return showSymbol
-      ? `${symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      ? `${symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: minimumFractionDigits })}`
       : converted.toFixed(minimumFractionDigits);
   }
 }

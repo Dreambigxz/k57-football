@@ -1,11 +1,11 @@
 .title-area{
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index: 1000;
 
   padding:14px 16px;
 
-  background:#19152f;
+  background: linear-gradient(150deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
 
   /* glass effect */
   backdrop-filter:blur(10px);
@@ -37,7 +37,7 @@
   border:none;
   border-radius:10px;
 
-  /* background:#a034fa; */
+  /* background:#ff9800; */
   color:white;
 
   font-size:18px;
@@ -90,7 +90,7 @@
 }
 
 .currency{
-  color:#a034fa;
+  color:#ff9800;
   font-weight:600;
 }
 

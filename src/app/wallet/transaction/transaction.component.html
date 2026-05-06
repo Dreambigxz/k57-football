@@ -1,7 +1,7 @@
 
 
 
-<div class="transactions-container ">
+<div class="transactions-container app-container">
 
   <!-- 🔹 Date Filter -->
   <form [formGroup]="filterForm" class="filter-bar">
@@ -22,75 +22,94 @@
     </div>
    </form>
 
-    <div *ngFor="let tx of storeData.store['transactions']" [ngClass]="tx.type" class="transaction-card" [class.pending]="tx.status === 'pending'" [class.completed]="tx.status=='success'" >
-      <div class="tx-header">
-        <div class="tx-type" [class.deposit]="tx.type === 'deposit'" [class.withdraw]="tx.type === 'withdraw'">
-          <!-- {{tx.sessionID}} -->
-          {{ tx.type | titlecase }}
-        </div>
-        <div class="tx-status" [class.awaiting]="tx.status === 'awaiting'" [class.pending]="tx.status === 'pending'" [class.completed]="tx.status=='success'">
-          {{ tx.status | titlecase }}
-        </div>
-      </div>
+   <div class="tx-list">
 
-      <div class="tx-body">
-        <div class="tx-row">
-          <span class="text-first">Amount:</span>
-          <strong>{{ tx.amount | currencyConverter:true}} </strong>
-        </div>
+     <div
+       *ngFor="let tx of storeData.store['transactions']"
+       class="tx-item"
+       [class.deposit]="tx.type === 'deposit'"
+       [class.withdraw]="tx.type === 'withdraw'"
+       (click)="viewDetails(tx)"
+       >
 
+       <!-- LEFT ICON -->
+       <div class="tx-icon">
+         <span *ngIf="tx.type === 'deposit'">⬇</span>
+         <span *ngIf="tx.type === 'withdraw'">⬆</span>
+       </div>
 
+       <!-- MAIN CONTENT -->
+       <div class="tx-main">
 
-        <div *ngIf="expandedTraId===tx.id" class="tra-details">
-          <div class="tx-row">
-            <span class="text-first">Fee:</span>
-            <strong>{{ tx.processFee| currencyConverter:true }}</strong>
-          </div>
+         <div class="tx-top">
+           <div class="tx-title">
+             {{ tx.type | titlecase }}
+           </div>
 
-          <!-- <div class="tx-row">
-            <span class="text-first">Method:</span>
-            <strong>{{ tx.method }}</strong>
-          </div> -->
-          <div class="tx-row">
-            <span class="text-first">Old balance:</span>
-            <strong>{{ tx.old_bal| currencyConverter:true }}</strong>
-          </div>
+           <div class="tx-amount">
+             {{ tx.amount | currencyConverter:true }}
+           </div>
+         </div>
 
-          <div class="tx-row">
-            <span class="text-first">New balance:</span>
-            <strong>{{ tx.new_bal| currencyConverter:true }}</strong>
-          </div>
+         <div class="tx-meta">
+           <span class="tx-date">
+             {{
+               tx.type.includes('vip')
+                 ? (tx.created_at | date:'MMM d, HH:mm')
+                 : (tx.timestamp | date:'MMM d, HH:mm')
+             }}
+           </span>
 
-          <div class="tx-row">
-            <span class="text-first">ID:</span>
-            <strong>{{ tx.sessionID || '—' }}</strong>
-          </div>
-        </div>
+           <span class="tx-status"
+             [class.awaiting]="tx.status === 'awaiting'"
+             [class.pending]="tx.status === 'pending'"
+             [class.completed]="tx.status === 'success'">
 
-        <div class="tx-row">
-          <span class="text-first">Date:</span>
-          <strong class="text-small">
-            {{
-              tx.type.includes('vip')
-                ? (tx.created_at | date:'medium')
-                : (tx.timestamp | date:'medium')
-            }}
-          </strong>
+             {{ tx.status | titlecase }}
+           </span>
+         </div>
 
-        </div>
-      </div>
+         <!-- EXPANDED DETAILS -->
+         <div *ngIf="expandedTraId === tx.id" class="tx-details">
 
-      <div class="tx-footer">
-        <button class="btn-sm btn-outline details-view-btn" (click)="viewDetails(tx)">
-          {{expandedTraId === tx.id ? "Close" : "View Details"}}
-        </button>
-      </div>
+           <div class="detail-row">
+             <span>Fee</span>
+             <strong>{{ tx.processFee | currencyConverter:true }}</strong>
+           </div>
+
+           <div class="detail-row">
+             <span>Old</span>
+             <strong>{{ tx.old_bal | currencyConverter:true }}</strong>
+           </div>
+
+           <div class="detail-row">
+             <span>New</span>
+             <strong>{{ tx.new_bal | currencyConverter:true }}</strong>
+           </div>
+
+           <div class="detail-row mono">
+             <span>ID</span>
+             <strong>{{ tx.sessionID || '—' }}</strong>
+           </div>
+
+         </div>
+
+       </div>
+
+       <!-- RIGHT ACTION -->
+       <div class="tx-action" >
+         {{ expandedTraId === tx.id ? '−' : '+' }}
+       </div>
+
+     </div>
+
     </div>
 
+    <!-- EMPTY -->
     <div *ngIf="!storeData.store['transactions']?.length" class="empty-state">
-      <div class="no-data text-center">
-        <img class="empty-icon" src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/database-off.svg">
-        <p>No transactions found.</p>
-      </div>
+     <div class="no-data">
+       <img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/database-off.svg">
+       <p>No transactions yet</p>
+     </div>
     </div>
   </div>

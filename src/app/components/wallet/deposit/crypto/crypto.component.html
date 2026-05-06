@@ -1,44 +1,57 @@
+<div *ngIf="walletService.quickNav.storeData.store['wallet']?.['hasPin']; else noPin">
 
-<div *ngIf="walletService.quickNav.storeData.store['deposit']">
-  <div class="network-options">
-    <label *ngFor="let curr of walletService.getVisibleCrptoNetwork([0, 2]);let i=index" class="network-option">
-      <input type="radio" name="network" value="{{curr.code}}"
-             [(ngModel)]="walletService.selectedCryptoMethod">
-      <span class="custom-radio"></span>
-      {{walletService.cryptos[i].label}}
-      <img class="crypto-img" [src]="walletService.cryptos[i].img" alt="">
-    </label>
+  <div *ngIf="walletService.quickNav.storeData.store['deposit']" class="deposit-card">
+
+    <!-- NETWORK SELECT -->
+    <div class="network-select">
+      <div
+        *ngFor="let curr of walletService.getVisibleCrptoNetwork([0,2]); let i=index"
+        class="network-chip"
+        [class.active]="walletService.selectedCryptoMethod === curr.code"
+        (click)="walletService.selectedCryptoMethod = curr.code">
+
+        <img [src]="walletService.cryptos[i].img" alt="">
+        <span>{{ walletService.cryptos[i].label }}</span>
+      </div>
+    </div>
+
+    <!-- QR + ADDRESS BLOCK -->
+    <div class="deposit-box">
+
+      <!-- QR -->
+      <div class="qr-box">
+        <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + payAddress" />
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="address-box">
+        <span class="addr">{{ payAddress | truncateCenter:18 }}</span>
+        <button (click)="walletService.quickNav.copy(payAddress, 'Address copied')" class="copy-btn">
+          Copy
+        </button>
+      </div>
+
+      <!-- MIN -->
+      <div class="min-box">
+        <span>Min Deposit</span>
+        <strong>
+          {{ walletService.selectedData?.symbol }}
+          {{ walletService.minimumPayment | number:'1.2-2' }}
+        </strong>
+      </div>
+
+    </div>
+
+    <!-- NOTICE -->
+    <div class="notice">
+      ⚠ Only send supported assets to this address.
+      Confirm transaction on the network before contacting support.
+    </div>
+
   </div>
 
-
-
-
-<!-- QR Code -->
-<div class="qr-wrapper">
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={{payAddress}}" />
 </div>
 
-<div class="min-transfer">
-  <div class="space-between">
-    <span class="min-label">Minimum</span>
-    <strong class="min-value">
-      {{walletService.selectedData?.symbol}}
-      {{walletService.minimumPayment | number:"1.2-2"}}
-    </strong>
-  </div>
-</div>
-
-<!-- Wallet Address -->
-<div class="wallet-address">
-  <span>{{payAddress|truncateCenter:16}}</span>
-  <button (click)="walletService.quickNav.copy(payAddress, 'Address  copied')" class="copy-btn">Copy</button>
-</div>
-
-<!-- Info -->
-<p class="warning-text">
-  Do not send other types of assets to the above address, as there is a risk of loss.
-  After sending, please ensure receipt confirmation from network nodes.
-  Contact online customer service after completion.
-</p>
-
-</div>
+<ng-template #noPin>
+  <app-create-pin></app-create-pin>
+</ng-template>

@@ -1,81 +1,30 @@
-<app-header2></app-header2>
-<app-spinner></app-spinner>
+<ng-container *ngIf="walletService.activeChannelObs$ | async as mode">
 
-  <!-- <div *ngIf="!walletService.initialized_currency" class="blur-overlay">
-  </div> -->
+  <div *ngIf="!walletService.storeData.store['savedMethod']" class="toggle-wrap">
+    <div class="toggle">
 
+      <div
+        class="toggle-indicator"
+        [class.right]="mode === 'local'">
+      </div>
 
-  <div class="wallet-page app-container">
+      <div
+        *ngIf="walletService.showCryptoTab"
+        class="toggle-btn"
+        [class.active]="mode === 'crypto'"
+        (click)="walletService.setActiveChannel('crypto')">
+        Crypto
+      </div>
 
-  <!-- Header -->
+      <div
+        *ngIf="walletService.showLocalTab"
+        class="toggle-btn"
+        [class.active]="mode === 'local'"
+        (click)="walletService.setActiveChannel('local')">
+        Local
+      </div>
 
-
-  <!-- Tabs -->
-  <div class="wallet-tabs">
-    <div
-      class="wallet-tab"
-      [class.active]="walletService.page === 'deposit'"
-      (click)="walletService.page = 'deposit'">
-      Deposit
-    </div>
-
-    <div
-      class="wallet-tab"
-      [class.active]="walletService.page === 'withdraw'"
-      (click)="walletService.page = 'withdraw'">
-      Withdraw
-    </div>
-
-    <div
-      class="wallet-tab"
-      [class.active]="walletService.page === 'transactions'"
-      (click)="walletService.page = 'transactions'">
-      Transactions
     </div>
   </div>
 
-  <!-- Deposit Card -->
-  <div class="deposit-card">
-
-    <h3 class="section-title">{{walletService.page|titlecase}}</h3>
-
-
-    <div class="dep-with-tab">
-      <div *ngIf="['deposit', 'withdraw'].includes(walletService.page)" class="type-tabs">
-
-        <div
-          *ngIf="walletService.showCryptoTab"
-          class="type-tab"
-          [class.active]="(walletService.activeChannelObs$ | async) === 'crypto'"
-          (click)="walletService.setActiveChannel('crypto')">
-          CRYPTO
-        </div>
-
-        <div
-          *ngIf="walletService.showLocalTab"
-          class="type-tab"
-          [class.active]="(walletService.activeChannelObs$ | async) === 'local'"
-          (click)="walletService.setActiveChannel('local')">
-          LOCAL
-        </div>
-
-      </div>
-
-      <div class="tab-content">
-
-        <ng-container *ngIf="walletService.page === 'deposit'">
-          <app-deposit></app-deposit>
-        </ng-container>
-
-        <ng-container *ngIf="walletService.page === 'withdraw'">
-          <app-withdraw></app-withdraw>
-        </ng-container>
-
-        <ng-container *ngIf="walletService.page.includes('tra')">
-          <app-transaction></app-transaction>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-</div>
+</ng-container>

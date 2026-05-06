@@ -89,13 +89,14 @@ export class WalletService {
     USD: { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
     TRON: { value: 'TRON', label: 'TRX', img: 'assets/img/card/tron.svg' }
   };
+
   getCryptoLabel(code: string, value:any=null): string {
     return this.cryptoMap[code as keyof typeof this.cryptoMap]?.label || '';
   }
 
   cryptoCoins = ["TRON", "USD", "USDT"]
 
-   activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('crypto');
+   activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('local');
    activeChannelObs$ = this.activeChannel$.asObservable();
 
   selectedNetwork = 'BEP20';
@@ -273,6 +274,5 @@ export class WalletService {
 
     })
   }
-
 
 }

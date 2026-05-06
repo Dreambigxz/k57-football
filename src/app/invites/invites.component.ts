@@ -4,6 +4,7 @@ import { Observable, interval } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { CurrencyConverterPipe } from '../reuseables/pipes/currency-converter.pipe';
+import { CountdownPipe } from '../reuseables/pipes/countdown.pipe';
 import { SpinnerComponent } from '../reuseables/http-loader/spinner.component';
 import { Header2Component } from "../components/header2/header2.component";
 
@@ -31,7 +32,7 @@ interface GenerationData {
     CommonModule,CurrencyConverterPipe,
     SpinnerComponent,Header2Component,
     TruncateCenterPipe,MenuBottomComponent,
-    UsersComponent, InactiveComponent
+    UsersComponent, InactiveComponent, CountdownPipe
   ],
   templateUrl: './invites.component.html',
   styleUrl: './invites.component.css'
@@ -42,10 +43,10 @@ export class InvitesComponent {
   quickNav = inject(QuickNavService)
   inviteService = inject(InviteServices)
 
-
   refLink:any
-
   walletData:any
+
+  frozen_comm :any = null
 
   ngOnInit(){
       if (!this.quickNav.storeData.get('refDir')) {this.quickNav.reqServerData.get("promotions/").subscribe(
@@ -64,7 +65,37 @@ export class InvitesComponent {
 
   makeRefLink() {
     const RefCode = this.quickNav.storeData.get('refDir')['RefCode'];
-    this.refLink = `${window.location.origin}/register?invite=${RefCode}`;
+    this.refLink = `${window.location.origin}/sign-up?ref=${RefCode}`;
+
+    if (!this.frozen_comm&&this.frozen_comm!==0) {
+      this.getFrozenComm()
+
+    }
+  }
+
+  getFrozenComm(){
+
+    const ref = this.quickNav.storeData.store['refDir'];
+
+    const frozen_data = {
+      amount:0
+    }
+
+    const getGen = (gen: number) => {
+      const res =  ref.rebate[`generation_${gen}`]//ref?.[key]?.[`generation_${gen}`];
+      frozen_data.amount += res.frozen || 0
+    };
+
+    const sumGen = () => {
+      for (let g = 1; g <= 3; g++) {
+        const d = getGen(g);
+
+      }
+    }
+
+    sumGen()
+
+    this.frozen_comm=frozen_data.amount
   }
 
   share(platform: string) {
@@ -100,6 +131,12 @@ export class InvitesComponent {
     }
 
     window.open(url, '_blank');
+  }
+
+  get firstNextMonth(){
+
+    const { currentDate, firstNextMonth } = this.quickNav.getDateRange();
+    return firstNextMonth
   }
 
 }

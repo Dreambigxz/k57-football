@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {  FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { WalletService } from '../../../../reuseables/services/wallet.service';
-import { CreatePinComponent } from '../create-pin/create-pin.component';
+import { CreatePinComponent } from '../../create-pin/create-pin.component';
 import { InvoiceComponent } from '../../invoice/invoice.component';
 
 import { TruncateCenterPipe } from '../../../../reuseables/pipes/truncate-center.pipe';
@@ -17,7 +17,7 @@ import { TruncateCenterPipe } from '../../../../reuseables/pipes/truncate-center
       TruncateCenterPipe
     ],
   templateUrl: './crypto.component.html',
-  styleUrls: ['./crypto.component.css', "../../../../wallet/styles/crypto-styles.css"]
+  styleUrls: ['./crypto.component.css' ,'../../crypto-style.component.css']
 })
 export class CryptoComponent {
 

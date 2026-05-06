@@ -18,6 +18,7 @@ import { AppDownloadManager } from '../reuseables/services/app-download-manager.
 import { AccountSummaryComponent } from "../account-summary/account-summary.component";
 import { NotificationModalComponent } from '../shared/notification-modal/notification-modal.component';
 
+import { MatchesComponent } from "../matches/matches.component";
 
 @Component({
   selector: 'app-main',
@@ -27,7 +28,7 @@ import { NotificationModalComponent } from '../shared/notification-modal/notific
     CommonModule,
     QuickNotificationsComponent,
     SpinnerComponent,MarketComponent,
-    TruncateCenterPipe, CurrencyConverterPipe, AccountSummaryComponent
+    TruncateCenterPipe, CurrencyConverterPipe, AccountSummaryComponent, MatchesComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
@@ -41,10 +42,10 @@ export class MainComponent {
   quickNav = inject(QuickNavService)
   appManager = inject(AppDownloadManager)
 
-  ngOnInit(){
-    if (!this.storeData.get('wallet')) {
-      this.reqServerData.get('dashboard/').subscribe()
-    }
-  }
+  // ngOnInit(){
+  //   if (!this.storeData.get('wallet')) {
+  //     this.reqServerData.get('dashboard/').subscribe()
+  //   }
+  // }
 
 }

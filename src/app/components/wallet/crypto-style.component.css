@@ -1,0 +1,111 @@
+.deposit-card, .crypto-withdraw {
+  padding: 10px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #1e160c, #120c05);
+  border: 1px solid rgba(255,235,59,0.08);
+}
+
+/* NETWORK CHIPS */
+.network-select {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.network-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #2a1f12;
+  cursor: pointer;
+  font-size: 12px;
+  color: #aaa;
+  transition: 0.2s;
+}
+
+.network-chip img {
+  width: 16px;
+  height: 16px;
+}
+
+.network-chip.active {
+  border: 1px solid #ff9800 !important;
+    color: #fff;
+  font-weight: 600;
+}
+
+/* MAIN BOX */
+.deposit-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* QR */
+.qr-box {
+  padding: 10px;
+  border-radius: 14px;
+  background: #2a1f12;
+  border: 1px solid rgba(255,235,59,0.08);
+}
+
+.qr-box img {
+  width: 160px;
+}
+
+/* ADDRESS */
+.address-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  background: #2a1f12;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.addr {
+  font-size: 13px;
+  color: #ddd;
+}
+
+.copy-btn {
+  background: #ff9800;
+  color: #111;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* MIN */
+.min-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #bbb;
+}
+
+.min-box strong {
+  color: #ffeb3b;
+}
+
+/* NOTICE */
+.notice {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.4;
+
+  padding: 10px;
+  border-radius: 10px;
+
+  background: rgba(255,152,0,0.08);
+  border: 1px dashed rgba(255,152,0,0.2);
+}

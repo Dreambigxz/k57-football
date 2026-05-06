@@ -17,8 +17,18 @@ export class InviteServices {
   users : any = [ ]
 
   pending_users = false
+  main = "referral"
+
+  activePercent:any
+  activeText:any
 
   get calculateTabData() {
+
+    if (this.main==='rebate') {
+      this.activeText='continuous'
+    }else{
+      this.activeText='one time'
+    }
 
     const ref = this.storeData.store['refDir'];
     const active = ref.active
@@ -26,30 +36,36 @@ export class InviteServices {
     const page = this.page;
     const level = this.level;
 
+    const percentages = ref.settings.percent
+
     const data = {
       amount: 0,
       count: 0,
       total: 0,
+      frozen:0,
       active: 0,
       deposit: { amount: 0, count: 0 },
       withdraw: { amount: 0, count: 0 },
       // users: [ ]
     };
 
-    const getGen = (key: string, gen: number) => {
-      const res =  ref?.[key]?.[`generation_${gen}`] || { count: 0, amount: 0 };
+    if(this.main==='rebate'&&this.page==='transactions'){
+      this.page='commissions'
+    }
 
+    const getGen = (key: string, gen: number, update_data:any=data) => {
 
-      data.total += ref.total[`generation_${gen}`]
-      data.active += ref.active[`generation_${gen}`]
+      const res =  ref?.[key]?.[`generation_${gen}`] || { count: 0, amount: 0 , frozen: 0};
+
+      update_data.amount += res.amount || 0 //ref.total[`generation_${gen}`]
+      update_data.count += res.count || 0  //ref.active[`generation_${gen}`]
+      update_data.frozen += res.frozen || 0
       return res
     };
 
     const sumGen = (key: string, target: any) => {
       for (let g = 1; g <= 3; g++) {
-        const d = getGen(key, g);
-        target.amount += d.amount || 0;
-        target.count += d.count || 0;
+        const d = getGen(key, g,target);
       }
     };
 
@@ -59,15 +75,13 @@ export class InviteServices {
     if (page === 'commissions') {
 
       if (level === 'all') {
-        sumGen('referral', data);
-        // sumGen('rebate', data);
+        sumGen(this.main,data);
 
+        this.activePercent = percentages[this.main] 
       } else {
-        const r = getGen('referral', gen);
-        // const b = getGen('rebate', gen);
+        const r = getGen(this.main, gen);
 
-        data.amount = r.amount || 0;
-        data.count = r.count || 0
+        this.activePercent = percentages[this.main][gen-1]
       }
     }
 
@@ -78,14 +92,13 @@ export class InviteServices {
         sumGen('deposit', data.deposit);
         sumGen('withdraw', data.withdraw);
       } else {
-        Object.assign(data.deposit, getGen('deposit', gen));
-        Object.assign(data.withdraw, getGen('withdraw', gen));
+        Object.assign(data.deposit, getGen('deposit', gen, data.deposit));
+        Object.assign(data.withdraw, getGen('withdraw', gen,data.withdraw));
       }
     }
 
     /* USERS */
     if (page === 'users') {
-
 
       if (this.level.includes('pending')){
         this.users = this.loadUser(this.level)
@@ -98,17 +111,21 @@ export class InviteServices {
     return data;
   }
 
-  loadUser(generation:any){
+  loadUser(generation: any) {
 
+    const key = 'promotionLevel_' + generation;
 
-    if (!this.quickNav.storeData.get('promotionLevel_'+generation)) {
-        this.quickNav.reqServerData.get('promotions/?level='+generation).subscribe({next: res => {
-          return this.quickNav.storeData.get('promotionLevel_'+generation)
-        }})
-      }
+    if (!this.quickNav.storeData.get(key)) {
 
-      return this.quickNav.storeData.get('promotionLevel_'+generation)
+      this.quickNav.reqServerData
+        .get('promotions/?level=' + generation)
+        .subscribe();
+    }
 
+    const data = this.quickNav.storeData.get(key) || [ ];
+
+    // ✅ return ONLY the selected type (no mutation)
+    return data.filter((item: any) => item.type === this.main);
   }
 
 }

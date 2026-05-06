@@ -1,4 +1,10 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
 
+<div class="wallet-page app-container">
+
+        <app-wallet></app-wallet>
+        
        <div *ngIf="walletService.activeChannel==='crypto'">
          <app-crypto></app-crypto>
        </div>
@@ -6,3 +12,5 @@
        <div *ngIf="walletService.activeChannel==='local'">
          <app-local></app-local>
        </div>
+
+<div>

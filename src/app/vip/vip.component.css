@@ -1,0 +1,219 @@
+.vip-page {
+  padding: 16px;
+  color: #fff;
+}
+
+.vip-orbit {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  margin: 20px 0;
+}
+
+/* curved line */
+.orbit-curve {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+  border-radius: 0 0 200px 200px;
+}
+
+/* node container */
+.orbit-node {
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* dot */
+.orbit-node .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #444;
+  margin: auto;
+  transition: all 0.3s ease;
+}
+
+/* active node */
+.orbit-node.active .dot {
+  background: #ff9800;
+  box-shadow: 0 0 10px #ff9800, 0 0 20px rgba(0,255,159,0.4);
+  transform: scale(1.2);
+}
+
+/* VIP label */
+.vip-text {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 6px;
+  display: block;
+}
+
+/* active text */
+.orbit-node.active .vip-text {
+  color: #ff9800;
+  font-weight: 600;
+}
+
+/* STATS */
+.vip-stats {
+  display: flex;
+  justify-content: space-around;
+  background: #1e160c;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 12px;
+  color: #ff9800;
+}
+
+.stat span {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.divider {
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* CARD */
+.vip-card {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(145deg,#1e160c,#120c05);
+}
+
+.vip-left h2 {
+  margin: 0;
+  color: #ff9800;
+}
+
+.sub {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* PROGRESS */
+.progress {
+  margin-top: 10px;
+}
+
+.bar {
+  height: 6px;
+  background: #2a1f12;
+  border-radius: 6px;
+}
+
+.fill {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg,#ff9800,#ffeb3b);
+}
+
+/* BADGE */
+.vip-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle,#ff9800,#120c05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vip-badge span {
+  position: absolute;
+  bottom: -10px;
+  background: #ff9800;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* SECTION */
+.vip-section {
+  margin-top: 20px;
+}
+
+.vip-item {
+  display: flex;
+  justify-content: space-between;
+  background: #1e160c;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+.vip-item strong {
+  color: #ffeb3b;
+}
+
+/*  */
+.vip-progress-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+/* block */
+.progress-block {
+  margin-bottom: 18px;
+}
+
+/* header */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.progress-header .target {
+  color: #00ff9f;
+  font-weight: 600;
+}
+
+/* bar */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* fill */
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* deposit color */
+.progress-fill.deposit {
+  background: linear-gradient(90deg, #00ff9f, #00c97a);
+}
+
+/* wager color */
+.progress-fill.wager {
+  background: linear-gradient(90deg, #00e0ff, #0099cc);
+}
+
+/* footer */
+.progress-footer {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}

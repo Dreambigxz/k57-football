@@ -10,15 +10,23 @@ import { ResetComponent} from "./auth/reset/reset.component";
 import {CreditAgentComponent} from './credit-agent/credit-agent.component'
 import {PaymentConfirmationComponent} from './payment-confirmation/payment-confirmation.component'
 
-import { MarketDetailsComponent } from "./market-details/market-details.component";
-import { CreateAiComponent } from "./create-ai/create-ai.component";
 import { PlansComponent } from "./plans/plans.component";
-import { WalletComponent } from "./wallet/wallet.component";
 
 import { InvitesComponent } from "./invites/invites.component";
 import { LuckyWheelComponent } from "./lucky-wheel/lucky-wheel.component";
 import { authGuard } from './reuseables/auth/auth.guard';
 import { AgentManagementComponent } from "./admin/agent-management/agent-management.component";
+
+import { MatchesComponent} from "./matches/matches.component";
+import { BetinfoComponent  } from "./betinfo/betinfo.component";
+import { BethistoryComponent} from "./bethistory/bethistory.component";
+
+import { WalletComponent } from "./wallet/wallet.component";
+import { DepositComponent } from "./wallet/deposit/deposit.component";
+import { WithdrawComponent } from "./wallet/withdraw/withdraw.component";
+import { TransactionComponent } from "./wallet/transaction/transaction.component";
+
+import { VipComponent } from "./vip/vip.component";
 
 export const routes: Routes = [
 
@@ -29,6 +37,25 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
 
+    {
+      path: 'matches',
+      component: MatchesComponent,
+      title: 'Matches',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'game-details/:id',
+      component: BetinfoComponent,
+      title: 'Game-details',
+      canActivate: [authGuard]
+    },
+
+    {
+      path: 'trade',
+      component: BethistoryComponent,
+      title: 'Trade-History',
+      canActivate: [authGuard]
+    },
 
     {
       path: 'notifications',
@@ -37,11 +64,22 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
 
-
     {
-      path: 'wallet',
-      component: WalletComponent,
-      title: 'wallet',
+      path: 'transaction',
+      component: TransactionComponent,
+      title: 'Transaction',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'deposit',
+      component: DepositComponent,
+      title: 'Deposit',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'withdraw',
+      component: WithdrawComponent,
+      title: 'Withdraw',
       canActivate: [authGuard]
     },
 
@@ -59,13 +97,11 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
 
-    { path: 'market-details', component: MarketDetailsComponent },
-
     // vi routers
     {
-      path: 'vi',
-      component: CreateAiComponent,
-      title: 'Create-plan',
+      path: 'vip',
+      component: VipComponent,
+      title: 'vip',
       canActivate: [authGuard]
 
     },
@@ -115,7 +151,7 @@ export const routes: Routes = [
       title: 'Login',
     },
     {
-      path: 'register',
+      path: 'sign-up',
       component: RegisterComponent,
       title: 'Register',
     },

@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import {  FormsModule } from '@angular/forms';
 import { WalletService } from '../../../../reuseables/services/wallet.service';
 import { TruncateCenterPipe } from '../../../../reuseables/pipes/truncate-center.pipe';
+import { CreatePinComponent } from '../../create-pin/create-pin.component';
 
 @Component({
   selector: 'app-crypto',
   imports: [
     CommonModule, FormsModule,
-    TruncateCenterPipe
+    TruncateCenterPipe,CreatePinComponent
 
   ],
   templateUrl: './crypto.component.html',
-  styleUrls: ['./crypto.component.css', "../../../../wallet/styles/crypto-styles.css"]
+  // styleUrls: ['./crypto.component.css']
+  styleUrls: ["../../crypto-style.component.css"]
 })
 export class CryptoComponent {
 

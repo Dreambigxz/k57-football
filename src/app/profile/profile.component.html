@@ -47,14 +47,14 @@
 
             </div>
 
-        <div (click)="quickNav.openTab('https://t.me/ventoraboss')" class="action-item">
+        <div (click)="quickNav.openTab('')" class="action-item">
           <i class="ti ti-headset"></i>
           <span>Support</span>
         </div>
 
-        <div (click)="quickNav.openTab('https://t.me/+4ze6KEl9xYdkMThk')" class="action-item">
+        <div (click)="quickNav.openTab('')" class="action-item">
           <i class="ti ti-brand-telegram"></i>
-          <span>Telegram</span>
+          <span>Telegram <br> channel</span>
         </div>
 
         <div (click)="openModal()" class="action-item">
@@ -68,13 +68,30 @@
        <!-- Settings -->
        <div class="menu-list">
 
-        <div (click)="quickNav.go('wallet',{page:'transactions'})" class="menu-item">
+        <div (click)="quickNav.go('transaction')" class="menu-item">
           <span class="menu-left">
             <i class="ti ti-history"></i>
             Transaction History
           </span>
           <i class="ti ti-chevron-right"></i>
         </div>
+
+        <div (click)="quickNav.go('vip')" class="menu-item">
+          <span class="menu-left">
+            <i class="ti ti-gift"></i>
+            Rewards
+          </span>
+          <i class="ti ti-chevron-right"></i>
+        </div>
+
+        <div (click)="quickNav.go('vip')" class="menu-item">
+          <span class="menu-left">
+            <i class="ti ti-diamond"></i>
+            VIP
+          </span>
+          <i class="ti ti-chevron-right"></i>
+        </div>
+
 
 
         <div (click)="quickNav.go('notifications')" class="menu-item">

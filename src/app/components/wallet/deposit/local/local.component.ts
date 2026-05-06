@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import {  FormsModule } from '@angular/forms';
 import { WalletService } from '../../../../reuseables/services/wallet.service';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { CreatePinComponent } from '../../create-pin/create-pin.component';
+
 
 @Component({
   selector: 'app-local',
-  imports: [CommonModule, FormsModule, InvoiceComponent],
+  imports: [CommonModule, FormsModule, InvoiceComponent, CreatePinComponent],
   templateUrl: './local.component.html',
-  styleUrl: './local.component.css'
+  styleUrls: ['./local.component.css', "../../wallet-styles.component.css"]
 })
 export class LocalComponent {
 

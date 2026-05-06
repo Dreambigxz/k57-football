@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { Header2Component } from "../../components/header2/header2.component";
+import { SpinnerComponent } from '../../reuseables/http-loader/spinner.component';
+
 import { CurrencyConverterPipe } from '../../reuseables/pipes/currency-converter.pipe';
 
 import { WalletService } from '../../reuseables/services/wallet.service';
@@ -16,6 +19,7 @@ import { QuickNavService } from '../../reuseables/services/quick-nav.service';
 
 import { CryptoComponent } from "../../components/wallet/deposit/crypto/crypto.component";
 import { LocalComponent } from "../../components/wallet/deposit/local/local.component";
+import { WalletComponent } from "../wallet.component";
 
 @Component({
   selector: 'app-deposit',
@@ -23,10 +27,11 @@ import { LocalComponent } from "../../components/wallet/deposit/local/local.comp
       CommonModule,FormsModule,
       ReactiveFormsModule, QRCodeComponent,CurrencyConverterPipe,
       TruncateCenterPipe, TimeFormatPipe,CountdownPipe,
-      CryptoComponent, LocalComponent
+      CryptoComponent, LocalComponent,Header2Component, SpinnerComponent,
+      WalletComponent
     ],
   templateUrl: './deposit.component.html',
-  styleUrls: ['./deposit.component.css', "../wallet-styles.component.css"]
+  styleUrls: ['./deposit.component.css']
 
 })
 export class DepositComponent {

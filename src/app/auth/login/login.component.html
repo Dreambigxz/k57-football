@@ -32,33 +32,27 @@
     </div>
 
     <!-- LANGUAGE -->
-    <div class="input-box">
+		<div class="language-switch">
 
-      <label>Language</label>
+      <i class="fa fa-globe"></i>
 
-      <div class="input-wrap">
+      <select
+        class="lang-select"
+        (change)="quickNav.changeLanguage($event)">
 
-        <i class="fa fa-globe"></i>
+        <option disabled selected>
+          Language
+        </option>
 
-        <select
-          class="lang-select"
-          (change)="quickNav.changeLanguage($event)">
+        <option
+          *ngFor="let lang of quickNav.langKeys"
+          [value]="lang">
 
-          <option disabled selected>
-            Change language
-          </option>
+          {{ lang }}
 
-          <option
-            *ngFor="let lang of quickNav.langKeys"
-            [value]="lang">
+        </option>
 
-            {{ lang }}
-
-          </option>
-
-        </select>
-
-      </div>
+      </select>
 
     </div>
 

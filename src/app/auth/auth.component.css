@@ -266,3 +266,53 @@
   }
 
 }
+
+/*  */
+/* LANGUAGE SWITCH */
+.language-switch {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0 auto 18px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.03);
+
+  border: 1px solid rgba(255,235,59,.08);
+
+  backdrop-filter: blur(10px);
+}
+
+/* ICON */
+.language-switch i {
+  color: #ff9800;
+  font-size: 13px;
+}
+
+/* SELECT */
+.language-switch select {
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #ffeb3b;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  appearance: none;
+}
+
+/* OPTIONS */
+.language-switch select option {
+  background: #1a1208;
+  color: white;
+}

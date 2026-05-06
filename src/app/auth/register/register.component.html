@@ -32,7 +32,7 @@
     </div>
 
     <!-- LANGUAGE -->
-    <div class="input-box">
+    <!-- <div class="input-box">
 
       <label>Language</label>
 
@@ -58,6 +58,30 @@
         </select>
 
       </div>
+
+    </div> -->
+
+    <div class="language-switch">
+
+      <i class="fa fa-globe"></i>
+
+      <select
+        class="lang-select"
+        (change)="quickNav.changeLanguage($event)">
+
+        <option disabled selected>
+          Language
+        </option>
+
+        <option
+          *ngFor="let lang of quickNav.langKeys"
+          [value]="lang">
+
+          {{ lang }}
+
+        </option>
+
+      </select>
 
     </div>
 

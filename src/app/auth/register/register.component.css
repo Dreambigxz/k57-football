@@ -1,0 +1,327 @@
+/* PAGE */
+.football-register {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at top,
+      #2a1b08 0%,
+      #120c05 65%);
+}
+
+/* LIGHT */
+.stadium-light {
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle,
+      rgba(255,152,0,.18),
+      rgba(255,235,59,.04),
+      transparent 70%);
+
+  filter: blur(40px);
+}
+
+/* FOOTBALLS */
+.football {
+  position: absolute;
+  border-radius: 50%;
+
+  opacity: .08;
+
+  background:
+    radial-gradient(circle at 30% 30%,
+      #ffeb3b,
+      #ff9800);
+}
+
+.football-left {
+  width: 180px;
+  height: 180px;
+
+  top: -50px;
+  left: -50px;
+}
+
+.football-right {
+  width: 130px;
+  height: 130px;
+
+  bottom: -40px;
+  right: -40px;
+}
+
+/* CARD */
+.register-card {
+  position: relative;
+
+  width: 100%;
+  max-width: 420px;
+
+  padding: 28px 22px;
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(145deg,
+      rgba(35,24,10,.96),
+      rgba(18,12,5,.96));
+
+  border: 1px solid rgba(255,235,59,.08);
+
+  backdrop-filter: blur(14px);
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45);
+
+  z-index: 2;
+}
+
+/* TOP */
+.register-top {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* LOGO */
+.logo-circle {
+  width: 84px;
+  height: 84px;
+
+  margin: auto auto 16px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(135deg,
+      #ff9800,
+      #ffeb3b);
+
+  box-shadow:
+    0 0 30px rgba(255,152,0,.35);
+}
+
+.logo-circle img {
+  width: 50px;
+}
+
+/* TITLES */
+.register-top h2 {
+  margin: 0;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  color: #fff;
+}
+
+.subtitle {
+  margin-top: 8px;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  color: #aaa;
+}
+
+/* INPUT GROUP */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  color: #ffeb3b;
+}
+
+/* INPUT */
+/* INPUT WRAP */
+.input-wrap {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 54px;
+
+  padding: 0 14px;
+  gap: 10px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,235,59,.08);
+}
+
+/* ICON */
+.input-wrap i {
+  font-size: 14px;
+  color: #ff9800;
+
+  flex-shrink: 0;
+}
+
+/* INPUT */
+.input-wrap input,
+.input-wrap select {
+  flex: 1;
+
+  height: auto;
+  padding: 16px 0;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #fff;
+  font-size: 14px;
+
+  appearance: none;
+}
+
+/* PLACEHOLDER */
+.input-wrap input::placeholder {
+  color: #777;
+}
+
+/* EYE BUTTON */
+.eye-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+
+  color: #999;
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+/* SELECT */
+.select-wrap select option {
+  background: #1a1208;
+}
+
+/* PASSWORD */
+.password-wrap {
+  position: relative;
+}
+
+.eye-btn {
+  cursor: pointer;
+  color: #aaa;
+}
+
+/* ERROR */
+.error {
+  margin-top: 6px;
+
+  font-size: 12px;
+  color: #ff6b6b;
+}
+
+/* BUTTON */
+.register-btn {
+  width: 100%;
+  height: 54px;
+
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 14px;
+
+  background:
+    linear-gradient(135deg,
+      #ff9800,
+      #ffeb3b);
+
+  color: #111;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: .25s;
+}
+
+.register-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(255,152,0,.25);
+}
+
+.register-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* FOOTER */
+.register-footer {
+  margin-top: 18px;
+
+  text-align: center;
+
+  font-size: 13px;
+  color: #999;
+}
+
+.register-footer span {
+  color: #ff9800;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* PITCH */
+.pitch-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 48px,
+      rgba(255,255,255,.015) 49px,
+      transparent 50px
+    );
+
+  pointer-events: none;
+}
+
+/* MOBILE */
+@media (max-width:480px) {
+
+  .register-card {
+    padding: 24px 18px;
+  }
+
+  .register-top h2 {
+    font-size: 24px;
+  }
+
+}

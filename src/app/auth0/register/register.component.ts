@@ -15,7 +15,7 @@ import { ReactiveFormsModule,FormsModule, FormBuilder, Validators } from '@angul
     ReactiveFormsModule,
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['../auth.component.css']
+  styleUrls: ['./register.component.css', '../auth.component.css']
 })
 export class RegisterComponent {
 

@@ -5,27 +5,21 @@ import { SpinnerComponent } from '../../reuseables/http-loader/spinner.component
 import { AuthService } from '../../reuseables/auth/auth.service';
 import { QuickNavService } from '../../reuseables/services/quick-nav.service';
 
-import { ReactiveFormsModule,FormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   imports: [
     CommonModule, SpinnerComponent,
     FormsModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './register.component.html',
-  styleUrls: ['../auth.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css', '../auth.component.css']
 })
-export class RegisterComponent {
+export class LoginComponent {
 
-    authService = inject(AuthService)
-    quickNav = inject(QuickNavService)
-
-
-    async ngOnInit()   {
-      this.authService.setRefCode()
-    }
-
+  authService = inject(AuthService)
+  quickNav = inject(QuickNavService)
 
 }

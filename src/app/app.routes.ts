@@ -13,6 +13,7 @@ import {PaymentConfirmationComponent} from './payment-confirmation/payment-confi
 import { PlansComponent } from "./plans/plans.component";
 
 import { InvitesComponent } from "./invites/invites.component";
+import { RewardComponent } from "./invites/reward/reward.component";
 import { LuckyWheelComponent } from "./lucky-wheel/lucky-wheel.component";
 import { authGuard } from './reuseables/auth/auth.guard';
 import { AgentManagementComponent } from "./admin/agent-management/agent-management.component";
@@ -87,6 +88,12 @@ export const routes: Routes = [
       path: 'invite',
       component: InvitesComponent,
       title: 'Invited-users',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'invite-rewards',
+      component: RewardComponent,
+      title: 'Invite-rewards',
       canActivate: [authGuard]
     },
 

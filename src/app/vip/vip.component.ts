@@ -66,9 +66,9 @@ export class VipComponent  {
   get depositProgress() {
     if (!this.requiredDeposit) return 0;
 
-    console.log("requiredDeposit>", this.requiredDeposit);
-
-    console.log({currentDeposit:this.currentDeposit});
+    // console.log("requiredDeposit>", this.requiredDeposit);
+    //
+    // console.log({currentDeposit:this.currentDeposit});
 
     return Math.min((this.currentDeposit / this.requiredDeposit) * 100, 100);
   }

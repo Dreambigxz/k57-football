@@ -34,87 +34,118 @@
     </div>
   </div>
 
-  <!-- 🔶 PAYMENT SECTION -->
-  <div *ngIf="deposit.status==='pending'; else awaitingDeposit" class="payment-section">
+  <div *ngIf="storeData.store['local_banks']?.[0].automatic; else notAutomatic">
 
-    <!-- 🏦 BANK SELECT -->
-    <div class="bank-select">
-      <div
-        *ngFor="let bank of storeData.store['local_banks']; let i=index"
-        class="bank-chip"
-        [class.active]="activeTab === i"
-        (click)="activeTab = i">
-
-        {{bank.bank}}
-      </div>
-    </div>
-
-    <!-- 🏦 BANK DETAILS -->
-    <div class="bank-card" *ngIf="storeData.store['local_banks']?.length">
-
-      <ng-container *ngFor="let bank of storeData.store['local_banks']; let i=index">
-
-        <div *ngIf="activeTab === i">
-
-          <div class="bank-row">
-            <span>Bank</span>
-            <strong>{{bank.bank}}</strong>
-          </div>
-
-          <div class="bank-row">
-            <span>Name</span>
-            <strong>{{bank.account_holder}}</strong>
-          </div>
-
-          <div class="bank-row">
-            <span>Account</span>
-
-            <div class="copy-line">
-              <strong>{{bank.account_number}}</strong>
-              <button (click)="walletService.quickNav.copy(bank.account_number)">Copy</button>
-            </div>
-          </div>
-
-        </div>
-
-      </ng-container>
-
-      <div class="notice">
-        ⚠ Send ₦{{deposit.init_amount}}
-        Ref: <strong>{{deposit.sessionID}}</strong>
-      </div>
-
-    </div>
-
-    <!-- 📘 GUIDE -->
-    <div class="guide mt-4">
-      <p>1. Transfer exact amount</p>
-      <!-- <p>2. Use reference </p> -->
-      <p>2. Upload receipt</p>
-    </div>
-
-    <!-- 📤 PROOF -->
-    <div class="proof-card mt-2">
-
-      <input type="file" (change)="onImageSelected($event)" />
-
-      <input
-        [(ngModel)]="sendersName"
-        placeholder="Sender name / account"
-      />
 
       <button
-        [disabled]="!selectedFile || !sendersName"
-        (click)="submitProof('payment_receipt')">
+        (click)="walletService.quickNav.openTab(deposit.extraField?.payInfo)"
+        type="submit"
+        class="form-btn"
+        >
 
-        Submit Receipt
+        Payment page
+        <div class="btn-arrow">
+          →
+        </div>
+
       </button>
+  </div>
+
+  <ng-template #notAutomatic>
+  <!-- 🔶 PAYMENT SECTION -->
+    <div *ngIf="deposit.status==='pending'; else awaitingDeposit" class="payment-section">
+
+      <!-- 🏦 BANK SELECT -->
+      <div class="bank-select">
+        <div
+          *ngFor="let bank of storeData.store['local_banks']; let i=index"
+          class="bank-chip"
+          [class.active]="activeTab === i"
+          (click)="activeTab = i">
+
+          {{bank.bank}}
+        </div>
+      </div>
+
+      <!-- 🏦 BANK DETAILS -->
+      <div class="bank-card" *ngIf="storeData.store['local_banks']?.length">
+
+        <ng-container *ngFor="let bank of storeData.store['local_banks']; let i=index">
+
+          <div *ngIf="activeTab === i">
+
+            <div class="bank-row">
+              <span>Bank</span>
+              <strong>{{bank.bank}}</strong>
+            </div>
+
+            <div class="bank-row">
+              <span>Name</span>
+              <strong>{{bank.account_holder}}</strong>
+            </div>
+
+            <div class="bank-row">
+              <span>Account</span>
+
+              <div class="copy-line">
+                <strong>{{bank.account_number}}</strong>
+                <button (click)="walletService.quickNav.copy(bank.account_number)">Copy</button>
+              </div>
+            </div>
+
+          </div>
+
+        </ng-container>
+
+        <div class="notice">
+          ⚠ Send ₦{{deposit.init_amount}}
+          Ref: <strong>{{deposit.sessionID}}</strong>
+        </div>
+
+      </div>
+
+      <!-- 📘 GUIDE -->
+      <div class="guide mt-4">
+        <p>1. Transfer exact amount</p>
+        <!-- <p>2. Use reference </p> -->
+        <p>2. Upload receipt</p>
+      </div>
+
+      <!-- 📤 PROOF -->
+      <div class="proof-card mt-2">
+
+        <div class="form-control">
+          <input type="file" (change)="onImageSelected($event)" />
+        </div>
+
+        <div class="form-control">
+          <input
+            [(ngModel)]="sendersName"
+            placeholder="Sender name / account"
+          />
+        </div>
+
+        <button
+          [disabled]="!selectedFile || !sendersName"
+          (click)="submitProof('payment_receipt')"
+          type="submit"
+          class="form-btn"
+          >
+
+          Submit Receipt
+          <div class="btn-arrow">
+            →
+          </div>
+
+        </button>
+
+      </div>
+
+
 
     </div>
 
-
-
-  </div>
+  </ng-template>
 
   <ng-template #awaitingDeposit></ng-template>
 

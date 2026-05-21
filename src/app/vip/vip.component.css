@@ -217,3 +217,60 @@
   color: #888;
   margin-top: 4px;
 }
+
+/*  */
+/* NORMAL */
+.vip-item {
+  transition: 0.3s ease;
+}
+
+/* BLINK */
+.vip-item.highlight {
+
+  animation:
+    vipBlink 0.8s ease-in-out infinite;
+
+  border:
+    1px solid rgba(255,152,0,0.45);
+}
+
+/* ANIMATION */
+@keyframes vipBlink {
+
+  0% {
+
+    background:
+      rgba(255,152,0,0.05);
+
+    box-shadow:
+      0 0 0 rgba(255,152,0,0);
+
+    transform: scale(1);
+  }
+
+  50% {
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,152,0,0.22),
+        rgba(255,235,59,0.12)
+      );
+
+    box-shadow:
+      0 0 24px rgba(255,152,0,0.35);
+
+    transform: scale(1.02);
+  }
+
+  100% {
+
+    background:
+      rgba(255,152,0,0.05);
+
+    box-shadow:
+      0 0 0 rgba(255,152,0,0);
+
+    transform: scale(1);
+  }
+}

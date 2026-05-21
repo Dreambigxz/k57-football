@@ -7,27 +7,60 @@ export class ToastService {
   appRef = inject(ApplicationRef)
   injector = inject(EnvironmentInjector)
 
-  show(data:any){
+  show(data: any) {
 
-    const componentRef = createComponent(ToastComponent,{
-      environmentInjector:this.injector
-    })
+    const componentRef = createComponent(
+      ToastComponent,
+      {
+        environmentInjector: this.injector
+      }
+    )
 
-    componentRef.instance.message = data.message
-    componentRef.instance.type = data.status || 'info'
+    componentRef.instance.message =
+      data.message
 
-    const duration = data.duration || 2500
+    componentRef.instance.type =
+      data.status || 'info'
 
-    this.appRef.attachView(componentRef.hostView)
+    /* PASS CLOSE FUNCTION */
+    componentRef.instance.close = () => {
 
-    const domElem = (componentRef.hostView as any).rootNodes[0]
+      this.appRef.detachView(
+        componentRef.hostView
+      )
+
+      componentRef.destroy()
+    }
+
+    const duration =
+      data.duration || 9500
+
+      componentRef.instance.duration =
+    duration;
+
+    this.appRef.attachView(
+      componentRef.hostView
+    )
+
+    const domElem =
+      (componentRef.hostView as any)
+        .rootNodes[0]
 
     document.body.appendChild(domElem)
 
-    setTimeout(()=>{
-      this.appRef.detachView(componentRef.hostView)
-      componentRef.destroy()
-    },duration)
+    setTimeout(() => {
+
+      if (!(componentRef.hostView as any).destroyed) {
+
+        this.appRef.detachView(
+          componentRef.hostView
+        )
+
+        componentRef.destroy()
+
+      }
+
+    }, duration)
 
   }
 

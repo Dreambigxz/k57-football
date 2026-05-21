@@ -64,9 +64,15 @@ export class Header2Component {
       this.pageName=segments.pop()?.split("?")[0] || ''
     }
 
+    if (this.pageName.includes("vip")) {
+      this.pageName="Vip"
+    }
+
     this.quickNav.storeData.set("pageName", this.pageName)
 
     // console.log({"pageName": this.pageName});
+    // console.log({segments});
+
 
   }
 

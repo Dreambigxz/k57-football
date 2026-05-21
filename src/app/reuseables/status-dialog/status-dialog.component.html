@@ -1,16 +1,60 @@
-<div mat-dialog-content class="dialog-content">
-  <div class="status-icon" [ngClass]="data.status">
-    <mat-icon>
-      {{ data.status === 'success' ? 'check' : 'close' }}
-    </mat-icon>
+<div class="premium-dialog">
+
+  <!-- GLOW -->
+  <div class="dialog-glow"></div>
+
+  <!-- ICON -->
+  <div
+    class="status-icon"
+    [ngClass]="data.status"
+  >
+
+    <div class="icon-ring"></div>
+
+    <div class="status-symbol">
+
+      {{
+        data.status === 'success'
+          ? '✅'
+          : '🚫'
+      }}
+
+    </div>
+
   </div>
 
-  <h2 class="dialog-title">{{ data.title }}</h2>
-  <p class="dialog-message">{{ data.message }}</p>
-</div>
+  <!-- CONTENT -->
+  <div class="dialog-content">
 
-<div (click)="reloadPage()" mat-dialog-actions class="dialog-actions">
-  <button mat-button  class=" btn-confirm">
-    Refresh
-  </button>
+    <h2 class="dialog-title">
+      {{ data.title }}
+    </h2>
+
+    <p class="dialog-message">
+      {{ data.message }}
+    </p>
+
+  </div>
+
+  <!-- ACTION -->
+  <div class="dialog-actions">
+
+    <button
+      mat-button
+      class="btn-confirm"
+      (click)="reloadPage()"
+    >
+
+      <span>
+        Refresh
+      </span>
+
+      <div class="btn-icon">
+        ↻
+      </div>
+
+    </button>
+
+  </div>
+
 </div>

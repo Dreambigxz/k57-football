@@ -73,12 +73,28 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
             body.main ? storeData.setMultiple(body.main) : 0;
 
             if (body.next_page) {
-              const next_page_ = body.next_page.url;
-              reqConfirmation?.confirmAction(
-                (next_page: any = next_page_) => { router.navigate([next_page]); },
-                body.next_page.title,
-                body.next_page.message
-              );
+              const next_page = body.next_page;
+              if (body.next_page.confirm_redirect) {
+                reqConfirmation?.confirmAction(
+                  (next_: any = next_page) => {
+                    router.navigate(
+                      [next_.url],
+                      {
+                        fragment: next_.focus
+                      }
+                    );
+                  },
+                  next_page.title,
+                  next_page.message
+                );
+              }else{
+                router.navigate(
+                  [next_page.url],
+                  {
+                    fragment:next_page.focus
+                  }
+                )
+              }
             }
           }
         }

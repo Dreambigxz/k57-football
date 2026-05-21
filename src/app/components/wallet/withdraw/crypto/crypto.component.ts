@@ -17,7 +17,7 @@ import { TruncateCenterPipe } from '../../../../reuseables/pipes/truncate-center
       TruncateCenterPipe
     ],
   templateUrl: './crypto.component.html',
-  styleUrls: ['./crypto.component.css' ,'../../crypto-style.component.css']
+  styleUrls: ['./crypto.component.css' ,'../../crypto-style.component.css', ]
 })
 export class CryptoComponent {
 

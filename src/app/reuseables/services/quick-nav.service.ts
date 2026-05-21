@@ -55,6 +55,9 @@ export class QuickNavService {
   }
 
   openTab(url:any){
+
+    console.log({url});
+
     window.open(url, '_blank')
   }
 

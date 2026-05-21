@@ -1,5 +1,31 @@
 <div class="toast-overlay">
-    <div class="toast-box" [ngClass]="type">
-      {{message}}
+
+  <div
+    class="toast-box"
+    [ngClass]="type"
+  >
+
+    <!-- PROGRESS -->
+    <div
+      class="toast-progress "
+      [style.animation-duration.ms]="duration"
+    ></div>
+
+    <!-- CONTENT -->
+    <div
+      class="toast-content"
+      [innerHTML]="message"
+    >
     </div>
+
+    <!-- CLOSE -->
+    <button
+      class="toast-close"
+      (click)="close()"
+    >
+      ✕
+    </button>
+
   </div>
+
+</div>

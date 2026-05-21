@@ -112,7 +112,7 @@
 </div>
 
   <!-- PRIVILEGES -->
-  <div class="vip-section">
+  <div class="vip-section" id="vip-privledges">
     <h4>Privileges</h4>
 
     <div class="vip-item">
@@ -120,9 +120,16 @@
       <strong>{{vip.active.claim_reward.replace("$","")|currencyConverter:true}}</strong>
     </div>
 
-    <div class="vip-item">
+    <div
+      id="daily-limit"
+      class="vip-item"
+      [class.highlight]="highlightDailyLimit"
+    >
       <span>Daily Limit</span>
-      <strong>{{vip.active.max_withdrawal|currencyConverter:true}}</strong>
+
+      <strong>
+        {{vip.active.max_withdrawal|currencyConverter:true}}
+      </strong>
     </div>
 
     <!-- <div class="vip-item">

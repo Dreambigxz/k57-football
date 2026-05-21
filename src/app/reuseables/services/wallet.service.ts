@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormsModule } from '@angu
 import { Router, NavigationEnd,NavigationStart,ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { QuickNavService } from '../services/quick-nav.service';
+import { CurrencyConverterPipe } from '../pipes/currency-converter.pipe';
 
 
 import {  copyContent} from '../helper';
@@ -28,6 +29,7 @@ export class WalletService {
   // Hold current payment method
   private paymentMethod$ = new BehaviorSubject<PaymentChannelGrp>('local');
   private reqConfirmation = inject(ConfirmationDialogService);
+  private currencyConverter = inject(CurrencyConverterPipe);
 
   reqServerData = inject(RequestDataService);
   storeData = inject(StoreDataService);
@@ -36,33 +38,41 @@ export class WalletService {
   toast = inject(ToastService)
   quickNav = inject(QuickNavService)
 
-
   private formHandler = inject(FormHandlerService);
 
   page : any = "deposit"
 
+  withdraw_options :any= []
+
   formView: Record<PaymentChannelGrp, any> = {
     'crypto':{
-        'withdraw':this.fb.group({
-          amount: ['', [Validators.required, Validators.min]],
 
-          origin:[""],
+
+      withdraw: this.fb.group({
+          amount: ['', [Validators.required, Validators.min(1)]],
+
+          origin: [""],
+
+          withdraw_option: [''],
+
           saved_method_id: [''],
-          payment_method:[""]
 
-        }),
-        payment_info:this.fb.group({
-          account_number: ['', [Validators.required]],
-          pin: ['', [Validators.required]],
+          payment_method: [""]
+      }),
 
-        }),
-        step:1
+      payment_info:this.fb.group({
+        account_number: ['', [Validators.required]],
+        pin: ['', [Validators.required]],
+
+      }),
+      step:1
     },
 
     'local':{
       'withdraw':this.fb.group({
         amount: ['', [Validators.required, Validators.min]],
         origin:[""],
+        withdraw_option: [''],
         saved_method_id: [''],
         payment_method:[""]
 
@@ -78,6 +88,42 @@ export class WalletService {
       step:1
 
     },
+  }
+
+  updateWithdrawalOptionsValidator(form:any) {
+
+    const control = form.get('withdraw_option')
+      control?.setValidators([Validators.required]);
+  }
+
+  updateWithdrawalOptionsSelector(){
+
+    if (this.page  !== 'withdraw'  || !this.quickNav.storeData.get("is_agent"))return
+
+    const Ref = this.storeData.get('ref_')
+    const Bet = this.storeData.get("bet_")
+    const Bal = this.storeData.get('wallet')?.balance?.new || 0
+
+    let sec_won = Bet?.records?.true || 0
+    let total_bet_profit = sec_won?.won?.won_amount || 0
+    let total_bet_withd = Bet?.withdrawn || 0
+
+    const bet_bal = total_bet_profit - total_bet_withd
+
+    // ref
+    let comm_cashed = Ref?.cashed_commissions || 0
+    let total_comm_withd = Ref?.withdrawn || 0
+
+    const team_bal = comm_cashed - total_comm_withd
+
+    const main_bal = Bal - bet_bal  - team_bal
+
+    this.withdraw_options =  [
+      ['withdraw_from_bet_balance',"Bet balance "+this.currencyConverter.transform(bet_bal)],
+      ['withdraw_from_team_balance',"Team balance "+this.currencyConverter.transform(team_bal)],
+      ["withdraw_from_balance","Main Balance "+this.currencyConverter.transform(main_bal)],
+    ]
+
   }
 
   cryptos = [
@@ -96,8 +142,8 @@ export class WalletService {
 
   cryptoCoins = ["TRON", "USD", "USDT"]
 
-   activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('crypto');
-   activeChannelObs$ = this.activeChannel$.asObservable();
+  activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('crypto');
+  activeChannelObs$ = this.activeChannel$.asObservable();
 
   selectedNetwork = 'BEP20';
 
@@ -112,6 +158,7 @@ export class WalletService {
 
   showCryptoTab = true;
   showLocalTab = true;
+
 
   constructor(private router: Router,  private route :ActivatedRoute) {
     this.router.events
@@ -216,8 +263,8 @@ export class WalletService {
     this.reqConfirmation.confirmAction(()=>{
       this.reqServerData.get(`wallet?dir=delete_${type}&showSpinner`).subscribe({
         next:(res)=>{
-
-          this.initializeCurrency()
+          this.initializeCurrency();
+          this.updateWithdrawalOptionsSelector();
         }
       })
     }, 'Cancel', `remove ${type} ?` )
@@ -250,6 +297,7 @@ export class WalletService {
       this.showLocalTab = true;
     }
 
+
   }
 
   setActiveChannel(channel: 'crypto' | 'local') {
@@ -257,7 +305,12 @@ export class WalletService {
   }
 
   get activeChannel() {
-    return this.activeChannel$.value;
+
+    const active_channel = this.activeChannel$.value
+    if (this.page==='withdraw'&&this.quickNav.storeData.get("is_agent")) {
+      this.updateWithdrawalOptionsValidator(this.formView[active_channel].withdraw)
+    }
+    return active_channel;
   }
 
   handleSubmit(form:any,processor:any){
@@ -267,12 +320,29 @@ export class WalletService {
     form.patchValue({ origin: window.location.origin });
 
     this.formHandler.submitForm(form, processor, 'wallet/?showSpinner', true,  (res) => {
-
-        // console.log({res});
         this.editingAddress=false
+        if (res.status === 'success' ) {
+          this.updateWithdrawalOptionsSelector()
+        }
+
+        console.log({processor});
 
 
+        setTimeout(() => {
+
+          const deposit =  this.storeData.get('deposit')
+          console.log({processor});
+
+          if (deposit?.extraField?.get("payInfo")&&processor==='create_deposit') {
+            this.quickNav.openTab(deposit?.extraField.get("payInfo"))
+          }
+        }, 300);
+        // if (res.redirect) {
+        //   this.quickNav.go(res.redirect)
+        // }
     })
   }
+
+
 
 }

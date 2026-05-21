@@ -24,9 +24,4 @@ export class ToastComponent {
 
   message = ''
   type = 'info'
-  duration = 7500;
-
-  close!: () => void;
-
-
 }

@@ -174,8 +174,6 @@ export class MatchService {
       }
     });
 
-    console.log({'bonusMatches':this.bonusMatches});
-
     return this.bonusMatches;
   }
 

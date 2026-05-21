@@ -43,8 +43,15 @@ export class WithdrawComponent {
       this.quickNav.storeData.store['pageDetails']='wallet'
       if (!this.quickNav.storeData.get('withdraw')) {
         this.quickNav.reqServerData.get('wallet?dir=start_withdraw').subscribe((res)=>{
-          console.log({res});
+          // console.log({res});
+          // if (!this.quickNav.storeData.get("is_agent")) {
+          //   console.log("notAgent");
+          //
+          //   this.walletService.withdraw_options =  [ ]
+          // }
           this.walletService.initializeCurrency()
+          this.walletService.updateWithdrawalOptionsSelector()
+
       })}
   }
 

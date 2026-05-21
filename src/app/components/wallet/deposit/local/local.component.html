@@ -25,36 +25,45 @@
     </div>
 
     <!-- AMOUNT + ACTION -->
-    <div *ngIf="walletService.selectedLocaLMethod" class="amount-card">
+    <div *ngIf="walletService.selectedLocaLMethod" class="amount-card premium-field">
 
       <!-- INPUT -->
-      <div class="amount-input">
+      <div class="amount-input form-control">
         <input
           type="number"
           [(ngModel)]="walletService.localAmount"
           placeholder="Enter amount"
         >
-        <span class="currency">
-          {{ walletService.selectedData?.symbol }}
-        </span>
+        <div class="currency-pill">
+          {{ walletService.selectedData.symbol }}
+        </div>
+
       </div>
 
       <!-- QUICK INFO -->
-      <div class="amount-info">
-        <span>Min</span>
+      <div class="field-info">
+
+        <span>
+          Minimum Withdrawal
+        </span>
+
         <strong>
-          {{ walletService.selectedData.symbol }}
-          {{ walletService.minimumPayment | number:'1.2-2' }}
+          {{walletService.selectedData.symbol}}
+          {{walletService.minimumPayment | number:'1.2-2'}}
         </strong>
+
       </div>
 
       <!-- CTA -->
       <button
         (click)="creeateDeposit()"
         [disabled]="!walletService.localAmount || walletService.localAmount < walletService.minimumPayment"
-        class="btn-send">
+        class="form-btn">
 
-        Continue →
+        Continue
+        <div class="btn-arrow">
+          →
+        </div>
       </button>
 
     </div>

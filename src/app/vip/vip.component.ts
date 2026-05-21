@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 
 import { QuickNavService } from '../reuseables/services/quick-nav.service';
@@ -7,6 +8,7 @@ import { QuickNavService } from '../reuseables/services/quick-nav.service';
 import { Header2Component } from "../components/header2/header2.component";
 import { SpinnerComponent } from '../reuseables/http-loader/spinner.component';
 import { CurrencyConverterPipe } from '../reuseables/pipes/currency-converter.pipe';
+import { RouterLink, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-vip',
@@ -22,7 +24,10 @@ import { CurrencyConverterPipe } from '../reuseables/pipes/currency-converter.pi
 export class VipComponent  {
 
     constructor(
-      public quickNav: QuickNavService
+      public quickNav: QuickNavService,
+      private route: ActivatedRoute,
+      private router: Router
+
     ){}
 
   // 🔢 total VIP levels
@@ -34,24 +39,76 @@ export class VipComponent  {
   currentWager:any = 0;
   requiredWager:any= 0
 
+  highlightDailyLimit = false;
+
   ngOnInit(): void {
-    // this.loadVipData();
 
-    if (!this.quickNav.storeData.get("vip_system")) {
+
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
+      if (event.urlAfterRedirects.includes("vip")) {
+        this.scroolView()
+      }
+    });
+
+    const vip_system = this.quickNav.storeData.get("vip_system")
+
+    if (!vip_system) {
       this.quickNav.reqServerData.get('dashboard').subscribe((res)=>{
-        console.log({res});
-
-        const vip_system = res.main.vip_system
-        this.currentDeposit=res.main.wallet.balance.new
-        this.requiredDeposit= parseFloat(vip_system.next.deposit_range.split("-")[0].replaceAll("$", ''))
-
-        this.currentWager = vip_system.bet_amount
-        this.requiredWager = parseFloat(vip_system.next.bet_amount.replaceAll("$",""))
-
-        // console.log({requiredWager:vip_system.next.bet_amount.replaceAll("$","")});
-
+        this.setVip(this.quickNav.storeData.get("vip_system"))
     })}
+    else{
+      this.setVip(vip_system)
+    }
 
+
+
+
+  }
+  
+  ngAfterViewInit(): void {
+     this.scroolView()
+  }
+
+  scroolView(): void {
+
+    this.route.fragment.subscribe(fragment => {
+
+      if (fragment === 'vip-privledges') {
+
+        setTimeout(() => {
+
+          const el =
+            document.getElementById('vip-privledges');
+
+          el?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+
+          /* HIGHLIGHT */
+          this.highlightDailyLimit = true;
+
+          setTimeout(() => {
+            this.highlightDailyLimit = false;
+          }, 3000);
+
+        }, 400);
+
+      }
+
+    });
+
+  }
+
+
+  setVip(vip_system:any){
+    this.currentDeposit=this.quickNav.storeData.get("wallet")?.balance.new
+    this.requiredDeposit= parseFloat(vip_system.next.deposit_range.split("-")[0].replaceAll("$", ''))
+
+    this.currentWager = vip_system.bet_amount
+    this.requiredWager = parseFloat(vip_system.next.bet_amount.replaceAll("$",""))
+
+    // this.scroolView()
   }
 
   getCurveHeight(i: number): number {
